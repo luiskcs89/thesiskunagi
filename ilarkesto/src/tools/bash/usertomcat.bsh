@@ -1,0 +1,67 @@
+#!/bin/bash
+
+COMMAND=$1
+
+export CATALINA_PID=~/tomcat/catalina.pid
+
+if [ "$COMMAND" = "restart" ]; then
+        $0 stop
+        if [ $? != 0 ]; then exit 1; fi
+        $0 start
+        exit
+fi
+
+
+if [ "$COMMAND" = "restartifrequested" ]; then
+    RESTART_TRIGGER_FILE=~/tomcat/restart-request/trigger
+
+    if [ -e $RESTART_TRIGGER_FILE ]
+    then
+        echo "`date` Tomcat restart request file found: $RESTART_TRIGGER_FILE"
+        cat $RESTART_TRIGGER_FILE
+        echo "Restarting Tomcat"
+        rm $RESTART_TRIGGER_FILE
+        $0 restart
+        exit
+    else
+        echo "Tomcat restart request file does not exist: $RESTART_TRIGGER_FILE"
+    fi
+    exit
+fi
+
+
+cd ~
+
+FORCE_FLAG=""
+if [ "$COMMAND" = "stop" ]; then
+    ~/tomcat/bin/catalina.sh stop
+    if [ -e $CATALINA_PID ]; then
+                echo "Graceful stop failed."
+        export FORCE_FLAG="-force"
+        ~/tomcat/bin/catalina.sh stop
+                if [ -e $CATALINA_PID ]; then
+                        PID=`cat $CATALINA_PID`
+                        echo "Killing PID: $PID"
+                        kill -9 $PID
+                        if [ $? != 0 ]; then
+                                echo "Killing by PID failed. Killing all Tomcat processes."
+                                /opt/ilarkesto/bin/killtomcat
+                        fi
+                else
+                        echo "Killing all Tomcat processes."
+                        /opt/ilarkesto/bin/killtomcat
+                fi
+        rm $CATALINA_PID
+        fi
+    exit 0
+fi
+
+
+if [ "$COMMAND" = "start" ]; then
+    rm -f ~/tomcat/logs/catalina.out
+    find ~/tomcat/webapps/ -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} \;
+    export LANG=en_US.UTF-8
+fi
+
+
+~/tomcat/bin/catalina.sh $COMMAND

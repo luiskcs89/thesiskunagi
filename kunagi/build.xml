@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+
+<project name="kunagi" default="package" basedir=".">
+
+	<property name="build.dir" value="build" />
+	<property name="homepage.output.dir" value="/var/www/kunagi.org" />
+
+	<property name="test.output.dir" value="test-output" />
+	<property name="ilarkesto.dir" value="../ilarkesto" />
+	<property name="classes.output.dir" value="${build.dir}/webapp/WEB-INF/classes" />
+
+	<target name="init">
+		<tstamp>
+			<format property="build.tstamp" pattern="yyyy-MM-dd HH:mm" locale="de,DE" />
+		</tstamp>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${test.output.dir}" />
+	</target>
+
+	<target name="compile-java" depends="init">
+
+		<mkdir dir="${classes.output.dir}" />
+		<copy todir="${classes.output.dir}" preservelastmodified="true">
+			<fileset dir="src/main/java" />
+			<fileset dir="src/generated/java" />
+			<fileset dir="${ilarkesto.dir}/src/main/java" />
+		</copy>
+		<javac source="1.6" target="1.6" srcdir="${classes.output.dir}" destdir="${classes.output.dir}" encoding="UTF-8" nowarn="true" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+			<classpath>
+				<fileset dir="${ilarkesto.dir}/lib" />
+			</classpath>
+		</javac>
+
+		<mkdir dir="${build.dir}/test-classes" />
+		<javac srcdir="src/test/java" destdir="${build.dir}/test-classes" encoding="UTF-8" nowarn="true" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+			<classpath>
+				<path location="${classes.output.dir}" />
+				<fileset dir="${ilarkesto.dir}/lib" />
+			</classpath>
+		</javac>
+
+		<replace file="${classes.output.dir}/scrum/server/build.properties" token="@build-date@" value="${build.tstamp}" />
+
+	</target>
+
+	<target name="compile-gwt" depends="compile-java">
+
+		<java classname="com.google.gwt.dev.Compiler" failonerror="true" fork="true">
+			<arg value="-war" />
+			<arg value="${build.dir}/webapp" />
+			<arg value="scrum.ScrumGwtApplication" />
+			<classpath location="src/main/java" />
+			<classpath location="src/generated/java" />
+			<classpath location="${ilarkesto.dir}/src/main/java" />
+			<classpath>
+				<fileset dir="${ilarkesto.dir}/lib" includes="gwt*.jar,validation-api-*.jar" />
+			</classpath>
+		</java>
+
+	</target>
+
+	<target name="test" depends="compile-java">
+		<delete dir="${test.output.dir}" />
+		<taskdef name="testng" classpath="${ilarkesto.dir}/lib/testng-5.8.jar" classname="org.testng.TestNGAntTask" />
+		<testng outputDir="${test.output.dir}" haltonfailure="true">
+			<classfileset dir="${build.dir}/test-classes" includes="**/*.class" />
+			<classpath>
+				<path location="${classes.output.dir}" />
+				<path location="${build.dir}/test-classes" />
+				<fileset dir="${ilarkesto.dir}/lib" />
+			</classpath>
+		</testng>
+	</target>
+
+	<target name="webapp" depends="compile-java, compile-gwt">
+		<copy todir="${build.dir}/webapp" preservelastmodified="true">
+			<fileset dir="src/main/webapp" />
+			<fileset file="README" />
+			<fileset dir="." includes="license.*" />
+		</copy>
+		<copy todir="${build.dir}/webapp/WEB-INF/lib" preservelastmodified="true">
+			<fileset dir="${ilarkesto.dir}/lib">
+				<exclude name="**/src/**" />
+				<exclude name="**/javadoc/**" />
+				<exclude name="**/gwt-dev.jar" />
+				<exclude name="**/gwt-user.jar" />
+				<exclude name="**/servlet-api-*.jar" />
+				<exclude name="**/google-collect-*.jar" />
+				<exclude name="**/junit-*.jar" />
+				<exclude name="**/testng-*.jar" />
+				<exclude name="**/httpunit-*.jar" />
+				<exclude name="**/tidy*.jar" />
+				<exclude name="**/oacurl-*.jar" />
+				<exclude name="**/bsh-*.jar" />
+				<exclude name="**/gdata-*.jar" />
+				<exclude name="**/jaudiotagger-*.jar" />
+				<exclude name="**/jcip-annotations.jar" />
+				<exclude name="**/mysql-*.jar" />
+				<exclude name="**/android*.jar" />
+			</fileset>
+		</copy>
+		<war destfile="${build.dir}/kunagi.war" basedir="${build.dir}/webapp" />
+	</target>
+
+	<target name="package" depends="webapp">
+		<mkdir dir="${build.dir}/package-content/kunagi" />
+		<copy file="${build.dir}/kunagi.war" tofile="${build.dir}/package-content/kunagi/kunagi.war" />
+		<copy todir="${build.dir}/package-content/kunagi" preservelastmodified="true">
+			<fileset file="README" />
+			<fileset dir="." includes="license.*" />
+		</copy>
+		<zip destfile="${build.dir}/kunagi.zip" basedir="${build.dir}/package-content" />
+		<exec executable="tar" failonerror="true" dir="${build.dir}/package-content">
+			<arg line="cjf ../kunagi.tar.bz2 kunagi" />
+		</exec>
+	</target>
+
+	<target name="publishPackages">
+		<copy todir="${homepage.output.dir}/latest" preservelastmodified="true">
+			<fileset file="${build.dir}/kunagi.war" />
+			<fileset file="${build.dir}/kunagi.zip" />
+			<fileset file="${build.dir}/kunagi.tar.bz2" />
+		</copy>
+	</target>
+
+	<target name="releaseHomepage">
+		<copy todir="${homepage.output.dir}" preservelastmodified="true">
+			<fileset dir="src/projectHomepage/html" />
+		</copy>
+		<mkdir dir="${homepage.output.dir}/velocity" />
+		<copy todir="${homepage.output.dir}/velocity" preservelastmodified="true">
+			<fileset dir="src/projectHomepage/velocity" />
+		</copy>
+	</target>
+
+	<target name="deployToLatest">
+		<copy file="${build.dir}/kunagi.war" tofile="/home/kunagi-latest/tomcat/webapps/kunagi-latest.war" preservelastmodified="true" />
+	</target>
+
+	<target name="installScripts">
+		<copy file="etc/kunagi-release.py" tofile="/home/kunagi/bin/kunagi-release" preservelastmodified="true" failonerror="true" />
+	</target>
+
+	<target name="continousIntegrationBuild" depends="clean,test,package,publishPackages,releaseHomepage,installScripts,deployToLatest" />
+
+</project>
+

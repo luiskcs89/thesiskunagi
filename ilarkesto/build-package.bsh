@@ -1,0 +1,97 @@
+#!/bin/bash
+
+SRC=`pwd`
+
+# checking if in project dir
+if [ ! -f "src/main/java/ilarkesto/Servers.java" ]
+then
+    echo "$0: build must be started from the ilarkesto project dir"
+	exit 1
+fi
+
+
+
+echo "cleaning up"
+rm -rf build/ilarkesto
+rm -f build/ilarkesto.tbz
+if [ $? != 0 ]; then exit 1; fi
+
+
+
+echo "building main bash-scripts"
+DEST_BIN=$SRC/build/ilarkesto/bin
+mkdir -p $DEST_BIN
+cd src/main/bash
+for file in $( find . -name '*.bsh' )
+do
+	file=${file#./}
+	filename=${file%.bsh}
+	echo " > ${filename}"
+	destfile=$DEST_BIN/$filename
+	cp $file $destfile
+	if [ $? != 0 ]; then exit 1; fi
+done
+#chown root:root $DEST_BIN/*
+#if [ $? != 0 ]; then exit 1; fi
+chmod 555 $DEST_BIN/*
+if [ $? != 0 ]; then exit 1; fi
+
+
+
+echo "building additional bash-Scripts"
+DEST_TOOLS=$SRC/build/ilarkesto/tools
+mkdir -p $DEST_TOOLS
+cd $SRC/src/tools/bash
+for file in $( find . -name '*.bsh' )
+do
+	file=${file#./}
+	filename=${file%.bsh}
+	echo " > ${filename}"
+	destfile=$DEST_TOOLS/$filename
+	cp $file $destfile
+	if [ $? != 0 ]; then exit 1; fi
+done
+#chown root:root $DEST_TOOLS/*
+#if [ $? != 0 ]; then exit 1; fi
+chmod 555 $DEST_TOOLS/*
+if [ $? != 0 ]; then exit 1; fi
+
+
+
+echo "building bashrc-includes"
+
+DEST_BASHRC=$SRC/build/ilarkesto/bashrc
+
+mkdir -p $DEST_BASHRC
+
+cp $SRC/src/main/bashrc/* $DEST_BASHRC
+if [ $? != 0 ]; then exit 1; fi
+
+#chown root:root $DEST_BASHRC/*
+#if [ $? != 0 ]; then exit 1; fi
+
+chmod 444 $DEST_BASHRC/*
+if [ $? != 0 ]; then exit 1; fi
+
+
+
+echo "building images"
+
+mkdir -p $SRC/build/ilarkesto/img
+
+cp -r $SRC/img/* $SRC/build/ilarkesto/img
+if [ $? != 0 ]; then exit 1; fi
+
+
+mkdir -p $SRC/build/ilarkesto/jar
+cp $SRC/build/ilarkesto.jar $SRC/build/ilarkesto/jar
+chmod 444 $SRC/build/ilarkesto/jar/ilarkesto.jar
+
+
+echo "building tarball"
+
+cd $SRC/build
+tar -cj --owner=root --group=root -f ilarkesto.tbz ilarkesto
+if [ $? != 0 ]; then exit 1; fi
+echo ""
+echo "-> build/ilarkesto.tbz"

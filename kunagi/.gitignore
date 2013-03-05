@@ -1,0 +1,10 @@
+src/main/gwt-unitCache
+commit
+runtimedata
+build
+test-output
+temp-testng*
+tomcat
+*.log
+velocity.log*
+
