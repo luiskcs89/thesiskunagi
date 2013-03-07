@@ -15,6 +15,7 @@
 package scrum.client.sprint;
 
 import ilarkesto.gwt.client.AnchorPanel;
+import scrum.client.collaboration.EmoticonsWidget;
 import scrum.client.common.ABlockWidget;
 import scrum.client.common.AScrumAction;
 import scrum.client.common.BlockHeaderWidget;
@@ -34,7 +35,7 @@ public class AcceptanceCriteriaInRequirementBlock extends ABlockWidget<Acceptanc
 		AcceptanceCriteria acceptanceCriteria = getObject();
 		statusIcon = header.addIconWrapper();
 		header.addText(acceptanceCriteria.getLabelModel());
-		// header.appendOuterCell(new EmoticonsWidget(acceptanceCriteria), null, true);
+		header.appendOuterCell(new EmoticonsWidget(acceptanceCriteria), null, true);
 		header.addMenuAction(new DeleteAcceptanceCriteriaAction(acceptanceCriteria));
 		header.addMenuAction(new ActivateChangeHistoryAction(acceptanceCriteria));
 	}

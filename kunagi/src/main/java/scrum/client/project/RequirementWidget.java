@@ -103,7 +103,7 @@ public class RequirementWidget extends AScrumWidget {
 			}
 		});
 
-		left.addFieldRow("Test", requirement.getTestDescriptionModel());
+		// left.addFieldRow("Test", requirement.getTestDescriptionModel());
 
 		left.addFieldRow("Estimated work", new RequirementEstimatedWorkWidget(requirement));
 
