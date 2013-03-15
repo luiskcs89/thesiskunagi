@@ -2379,6 +2379,10 @@ public abstract class GProject
         return getDao().getReleasesByProject((Project)this);
     }
 
+    public final java.util.List<scrum.client.project.UsabilityMechanism> getUsabilityMechanisms() {
+        return getDao().getUsabilityMechanismsByProject((Project)this);
+    }
+
     public final java.util.List<scrum.client.journal.ProjectEvent> getProjectEvents() {
         return getDao().getProjectEventsByProject((Project)this);
     }

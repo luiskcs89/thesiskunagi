@@ -17,12 +17,10 @@ package scrum.client.sprint;
 import ilarkesto.gwt.client.AnchorPanel;
 import ilarkesto.gwt.client.ButtonWidget;
 import ilarkesto.gwt.client.Gwt;
-import ilarkesto.gwt.client.TableBuilder;
 import ilarkesto.gwt.client.animation.AnimatingFlowPanel.InsertCallback;
 
 import java.util.List;
 
-import scrum.client.ScrumGwt;
 import scrum.client.collaboration.EmoticonsWidget;
 import scrum.client.common.ABlockWidget;
 import scrum.client.common.BlockHeaderWidget;
@@ -108,7 +106,7 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 	protected Widget onExtendedInitialization() {
 		Requirement requirement = getObject();
 
-		requirementWidget = new RequirementWidget(requirement, false, false, true, false, false, false, false);
+		requirementWidget = new RequirementWidget(requirement, true, false, true, true, false, false, false);
 		taskList = new BlockListWidget<Task>(TaskInRequirementBlock.FACTORY);
 		taskList.setAutoSorter(requirement.getTasksOrderComparator());
 		if (requirement.getProject().isTeamMember(getCurrentUser())) {
@@ -122,24 +120,21 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 		createAcceptanceCriteriaButton = new ButtonWidget(new CreateAcceptanceCriteriaAction(requirement));
 		changeHistoryWidget = new ChangeHistoryWidget(requirement);
 
-		FlowPanel left = new FlowPanel();
-		left.add(requirementWidget);
-		left.add(taskList);
-		left.add(Gwt.createDiv("CreateTaskButtonWrapper", createTaskButton));
-		left.add(acceptanceCriteriaList);
-		left.add(Gwt.createDiv("CreateAcceptanceCriteriaButtonWrapper", createAcceptanceCriteriaButton));
-		left.add(changeHistoryWidget);
-
-		right = new FlowPanel();
+		FlowPanel panel = new FlowPanel();
 
 		if (requirement.isDecidable() && requirement.getProject().isProductOwner(getCurrentUser())) {
-			right.add(RequirementWidget.createActionsPanelForCompletedRequirement(requirement));
-			right.add(Gwt.createSpacer(1, 10));
+			panel.add(RequirementWidget.createActionsPanelForCompletedRequirement(requirement));
+			panel.add(Gwt.createSpacer(1, 10));
 		}
-		right.add(ScrumGwt.createEmoticonsAndComments(requirement));
 
-		bodyWidget = TableBuilder.row(20, left, right);
-		return bodyWidget;
+		panel.add(requirementWidget);
+		panel.add(taskList);
+		panel.add(Gwt.createDiv("CreateTaskButtonWrapper", createTaskButton));
+		panel.add(acceptanceCriteriaList);
+		panel.add(Gwt.createDiv("CreateAcceptanceCriteriaButtonWrapper", createAcceptanceCriteriaButton));
+		panel.add(changeHistoryWidget);
+
+		return panel;
 	}
 
 	@Override

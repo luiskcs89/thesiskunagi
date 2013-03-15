@@ -43,6 +43,7 @@ public abstract class GRequirement
         properties.put("issueId", this.issueId);
         properties.put("number", this.number);
         properties.put("qualitysIds", this.qualitysIds);
+        properties.put("usabilityMechanismsIds", this.usabilityMechanismsIds);
         properties.put("label", this.label);
         properties.put("description", this.description);
         properties.put("testDescription", this.testDescription);
@@ -376,6 +377,96 @@ public abstract class GRequirement
     protected final void updateQualitys(Object value) {
         Collection<String> ids = (Collection<String>) value;
         setQualitys((java.util.Set) qualityDao.getByIdsAsSet(ids));
+    }
+
+    // -----------------------------------------------------------
+    // - usabilityMechanisms
+    // -----------------------------------------------------------
+
+    private java.util.Set<String> usabilityMechanismsIds = new java.util.HashSet<String>();
+
+    public final java.util.Set<scrum.server.project.UsabilityMechanism> getUsabilityMechanisms() {
+        return (java.util.Set) usabilityMechanismDao.getByIdsAsSet(this.usabilityMechanismsIds);
+    }
+
+    public final void setUsabilityMechanisms(Collection<scrum.server.project.UsabilityMechanism> usabilityMechanisms) {
+        usabilityMechanisms = prepareUsabilityMechanisms(usabilityMechanisms);
+        if (usabilityMechanisms == null) usabilityMechanisms = Collections.emptyList();
+        java.util.Set<String> ids = getIdsAsSet(usabilityMechanisms);
+        if (this.usabilityMechanismsIds.equals(ids)) return;
+        this.usabilityMechanismsIds = ids;
+        updateLastModified();
+        fireModified("usabilityMechanisms="+Str.format(usabilityMechanisms));
+    }
+
+    protected Collection<scrum.server.project.UsabilityMechanism> prepareUsabilityMechanisms(Collection<scrum.server.project.UsabilityMechanism> usabilityMechanisms) {
+        return usabilityMechanisms;
+    }
+
+    protected void repairDeadUsabilityMechanismReference(String entityId) {
+        if (this.usabilityMechanismsIds.remove(entityId)) fireModified("usabilityMechanisms-=" + entityId);
+    }
+
+    public final boolean containsUsabilityMechanism(scrum.server.project.UsabilityMechanism usabilityMechanism) {
+        if (usabilityMechanism == null) return false;
+        return this.usabilityMechanismsIds.contains(usabilityMechanism.getId());
+    }
+
+    public final int getUsabilityMechanismsCount() {
+        return this.usabilityMechanismsIds.size();
+    }
+
+    public final boolean isUsabilityMechanismsEmpty() {
+        return this.usabilityMechanismsIds.isEmpty();
+    }
+
+    public final boolean addUsabilityMechanism(scrum.server.project.UsabilityMechanism usabilityMechanism) {
+        if (usabilityMechanism == null) throw new IllegalArgumentException("usabilityMechanism == null");
+        boolean added = this.usabilityMechanismsIds.add(usabilityMechanism.getId());
+        if (added) updateLastModified();
+        if (added) fireModified("usabilityMechanisms+=" + usabilityMechanism);
+        return added;
+    }
+
+    public final boolean addUsabilityMechanisms(Collection<scrum.server.project.UsabilityMechanism> usabilityMechanisms) {
+        if (usabilityMechanisms == null) throw new IllegalArgumentException("usabilityMechanisms == null");
+        boolean added = false;
+        for (scrum.server.project.UsabilityMechanism usabilityMechanism : usabilityMechanisms) {
+            added = added | this.usabilityMechanismsIds.add(usabilityMechanism.getId());
+        }
+        return added;
+    }
+
+    public final boolean removeUsabilityMechanism(scrum.server.project.UsabilityMechanism usabilityMechanism) {
+        if (usabilityMechanism == null) throw new IllegalArgumentException("usabilityMechanism == null");
+        if (this.usabilityMechanismsIds == null) return false;
+        boolean removed = this.usabilityMechanismsIds.remove(usabilityMechanism.getId());
+        if (removed) updateLastModified();
+        if (removed) fireModified("usabilityMechanisms-=" + usabilityMechanism);
+        return removed;
+    }
+
+    public final boolean removeUsabilityMechanisms(Collection<scrum.server.project.UsabilityMechanism> usabilityMechanisms) {
+        if (usabilityMechanisms == null) return false;
+        if (usabilityMechanisms.isEmpty()) return false;
+        boolean removed = false;
+        for (scrum.server.project.UsabilityMechanism _element: usabilityMechanisms) {
+            removed = removed | removeUsabilityMechanism(_element);
+        }
+        return removed;
+    }
+
+    public final boolean clearUsabilityMechanisms() {
+        if (this.usabilityMechanismsIds.isEmpty()) return false;
+        this.usabilityMechanismsIds.clear();
+        updateLastModified();
+        fireModified("usabilityMechanisms cleared");
+        return true;
+    }
+
+    protected final void updateUsabilityMechanisms(Object value) {
+        Collection<String> ids = (Collection<String>) value;
+        setUsabilityMechanisms((java.util.Set) usabilityMechanismDao.getByIdsAsSet(ids));
     }
 
     // -----------------------------------------------------------
@@ -925,6 +1016,7 @@ public abstract class GRequirement
             if (property.equals("issueId")) updateIssue(value);
             if (property.equals("number")) updateNumber(value);
             if (property.equals("qualitysIds")) updateQualitys(value);
+            if (property.equals("usabilityMechanismsIds")) updateUsabilityMechanisms(value);
             if (property.equals("label")) updateLabel(value);
             if (property.equals("description")) updateDescription(value);
             if (property.equals("testDescription")) updateTestDescription(value);
@@ -947,6 +1039,8 @@ public abstract class GRequirement
         repairDeadIssueReference(entityId);
         if (this.qualitysIds == null) this.qualitysIds = new java.util.HashSet<String>();
         repairDeadQualityReference(entityId);
+        if (this.usabilityMechanismsIds == null) this.usabilityMechanismsIds = new java.util.HashSet<String>();
+        repairDeadUsabilityMechanismReference(entityId);
         if (this.tasksOrderIds == null) this.tasksOrderIds = new java.util.ArrayList<java.lang.String>();
         if (this.themes == null) this.themes = new java.util.ArrayList<java.lang.String>();
         repairDeadEpicReference(entityId);
@@ -988,6 +1082,16 @@ public abstract class GRequirement
                 repairDeadQualityReference(entityId);
             }
         }
+        if (this.usabilityMechanismsIds == null) this.usabilityMechanismsIds = new java.util.HashSet<String>();
+        Set<String> usabilityMechanisms = new HashSet<String>(this.usabilityMechanismsIds);
+        for (String entityId : usabilityMechanisms) {
+            try {
+                usabilityMechanismDao.getById(entityId);
+            } catch (EntityDoesNotExistException ex) {
+                LOG.info("Repairing dead usabilityMechanism reference");
+                repairDeadUsabilityMechanismReference(entityId);
+            }
+        }
         if (this.tasksOrderIds == null) this.tasksOrderIds = new java.util.ArrayList<java.lang.String>();
         if (this.themes == null) this.themes = new java.util.ArrayList<java.lang.String>();
         try {
@@ -1025,6 +1129,12 @@ public abstract class GRequirement
 
     public static final void setQualityDao(scrum.server.project.QualityDao qualityDao) {
         GRequirement.qualityDao = qualityDao;
+    }
+
+    static scrum.server.project.UsabilityMechanismDao usabilityMechanismDao;
+
+    public static final void setUsabilityMechanismDao(scrum.server.project.UsabilityMechanismDao usabilityMechanismDao) {
+        GRequirement.usabilityMechanismDao = usabilityMechanismDao;
     }
 
     static scrum.server.project.RequirementDao requirementDao;

@@ -51,6 +51,8 @@ public abstract class GRequirementDao
         numbersCache = null;
         requirementsByQualityCache.clear();
         qualitysCache = null;
+        requirementsByUsabilityMechanismCache.clear();
+        usabilityMechanismsCache = null;
         requirementsByLabelCache.clear();
         labelsCache = null;
         requirementsByDescriptionCache.clear();
@@ -285,6 +287,46 @@ public abstract class GRequirementDao
 
         public boolean test(Requirement e) {
             return e.containsQuality(value);
+        }
+
+    }
+
+    // -----------------------------------------------------------
+    // - usabilityMechanisms
+    // -----------------------------------------------------------
+
+    private final Cache<scrum.server.project.UsabilityMechanism,Set<Requirement>> requirementsByUsabilityMechanismCache = new Cache<scrum.server.project.UsabilityMechanism,Set<Requirement>>(
+            new Cache.Factory<scrum.server.project.UsabilityMechanism,Set<Requirement>>() {
+                public Set<Requirement> create(scrum.server.project.UsabilityMechanism usabilityMechanism) {
+                    return getEntities(new ContainsUsabilityMechanism(usabilityMechanism));
+                }
+            });
+
+    public final Set<Requirement> getRequirementsByUsabilityMechanism(scrum.server.project.UsabilityMechanism usabilityMechanism) {
+        return new HashSet<Requirement>(requirementsByUsabilityMechanismCache.get(usabilityMechanism));
+    }
+    private Set<scrum.server.project.UsabilityMechanism> usabilityMechanismsCache;
+
+    public final Set<scrum.server.project.UsabilityMechanism> getUsabilityMechanisms() {
+        if (usabilityMechanismsCache == null) {
+            usabilityMechanismsCache = new HashSet<scrum.server.project.UsabilityMechanism>();
+            for (Requirement e : getEntities()) {
+                usabilityMechanismsCache.addAll(e.getUsabilityMechanisms());
+            }
+        }
+        return usabilityMechanismsCache;
+    }
+
+    private static class ContainsUsabilityMechanism implements Predicate<Requirement> {
+
+        private scrum.server.project.UsabilityMechanism value;
+
+        public ContainsUsabilityMechanism(scrum.server.project.UsabilityMechanism value) {
+            this.value = value;
+        }
+
+        public boolean test(Requirement e) {
+            return e.containsUsabilityMechanism(value);
         }
 
     }
@@ -762,6 +804,12 @@ public abstract class GRequirementDao
 
     public void setQualityDao(scrum.server.project.QualityDao qualityDao) {
         this.qualityDao = qualityDao;
+    }
+
+    scrum.server.project.UsabilityMechanismDao usabilityMechanismDao;
+
+    public void setUsabilityMechanismDao(scrum.server.project.UsabilityMechanismDao usabilityMechanismDao) {
+        this.usabilityMechanismDao = usabilityMechanismDao;
     }
 
 }

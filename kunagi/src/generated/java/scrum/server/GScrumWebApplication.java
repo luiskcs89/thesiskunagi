@@ -674,6 +674,31 @@ public abstract class GScrumWebApplication
         taskDao = null;
     }
 
+    // --- usabilityMechanismDao ---
+
+    private scrum.server.project.UsabilityMechanismDao usabilityMechanismDao;
+
+    public final scrum.server.project.UsabilityMechanismDao getUsabilityMechanismDao() {
+        if (usabilityMechanismDao == null) {
+            usabilityMechanismDao = createUsabilityMechanismDao();
+            initializeUsabilityMechanismDao(usabilityMechanismDao);
+        }
+        return usabilityMechanismDao;
+    }
+
+    protected scrum.server.project.UsabilityMechanismDao createUsabilityMechanismDao() {
+        return usabilityMechanismDao = ilarkesto.base.Reflect.newInstance(scrum.server.project.UsabilityMechanismDao.class);
+    }
+
+    protected void initializeUsabilityMechanismDao(scrum.server.project.UsabilityMechanismDao bean) {
+        autowire(bean);
+        ilarkesto.base.Reflect.invokeInitializeIfThere(bean);
+    }
+
+    public final void resetUsabilityMechanismDao() {
+        usabilityMechanismDao = null;
+    }
+
     // --- wikipageDao ---
 
     private scrum.server.collaboration.WikipageDao wikipageDao;

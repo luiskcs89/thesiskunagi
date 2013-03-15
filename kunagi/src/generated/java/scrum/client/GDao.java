@@ -2181,6 +2181,14 @@ public abstract class GDao
         return ret;
     }
 
+    public final List<scrum.client.project.Requirement> getRequirementsByUsabilityMechanism(scrum.client.project.UsabilityMechanism usabilityMechanism) {
+        List<scrum.client.project.Requirement> ret = new ArrayList<scrum.client.project.Requirement>();
+        for (scrum.client.project.Requirement entity : requirements.values()) {
+            if (entity.containsUsabilityMechanism(usabilityMechanism)) ret.add(entity);
+        }
+        return ret;
+    }
+
     public final List<scrum.client.project.Requirement> getRequirementsByLabel(java.lang.String label) {
         List<scrum.client.project.Requirement> ret = new ArrayList<scrum.client.project.Requirement>();
         for (scrum.client.project.Requirement entity : requirements.values()) {
@@ -3537,6 +3545,100 @@ public abstract class GDao
         return ret;
     }
 
+    // --- UsabilityMechanism ---
+
+    protected Map<String, scrum.client.project.UsabilityMechanism> usabilityMechanisms = new HashMap<String, scrum.client.project.UsabilityMechanism>();
+
+    public final void clearUsabilityMechanisms() {
+        ilarkesto.core.logging.Log.DEBUG("Clearing UsabilityMechanisms");
+        usabilityMechanisms.clear();
+    }
+
+    public final boolean containsUsabilityMechanism(scrum.client.project.UsabilityMechanism usabilityMechanism) {
+        return usabilityMechanisms.containsKey(usabilityMechanism.getId());
+    }
+
+    public final void deleteUsabilityMechanism(scrum.client.project.UsabilityMechanism usabilityMechanism) {
+        usabilityMechanisms.remove(usabilityMechanism.getId());
+        entityDeleted(usabilityMechanism);
+    }
+
+    public final void createUsabilityMechanism(scrum.client.project.UsabilityMechanism usabilityMechanism, Runnable successAction) {
+        usabilityMechanisms.put(usabilityMechanism.getId(), usabilityMechanism);
+        entityCreated(usabilityMechanism, successAction);
+    }
+
+    public final void createUsabilityMechanism(scrum.client.project.UsabilityMechanism usabilityMechanism) {
+        usabilityMechanisms.put(usabilityMechanism.getId(), usabilityMechanism);
+        entityCreated(usabilityMechanism, null);
+    }
+
+    protected scrum.client.project.UsabilityMechanism updateUsabilityMechanism(Map data) {
+        String id = (String) data.get("id");
+        scrum.client.project.UsabilityMechanism entity = usabilityMechanisms.get(id);
+        if (entity == null) {
+            entity = new scrum.client.project.UsabilityMechanism(data);
+            usabilityMechanisms.put(id, entity);
+            ilarkesto.core.logging.Log.DEBUG("UsabilityMechanism received: " + entity.getId() + " ("+entity+")");
+        } else {
+            entity.updateProperties(data);
+            ilarkesto.core.logging.Log.DEBUG("UsabilityMechanism updated: " + entity);
+        }
+        return entity;
+    }
+
+    public final scrum.client.project.UsabilityMechanism getUsabilityMechanism(String id) {
+        scrum.client.project.UsabilityMechanism ret = usabilityMechanisms.get(id);
+        if (ret == null) throw new ilarkesto.gwt.client.EntityDoesNotExistException(id);
+        return ret;
+    }
+
+    public final Set<scrum.client.project.UsabilityMechanism> getUsabilityMechanisms(Collection<String> ids) {
+        Set<scrum.client.project.UsabilityMechanism> ret = new HashSet<scrum.client.project.UsabilityMechanism>();
+        for (String id : ids) {
+            scrum.client.project.UsabilityMechanism entity = usabilityMechanisms.get(id);
+            if (entity == null) throw new ilarkesto.gwt.client.EntityDoesNotExistException(id);
+            ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityMechanism> getUsabilityMechanisms() {
+        return new ArrayList<scrum.client.project.UsabilityMechanism>(usabilityMechanisms.values());
+    }
+
+    public final List<scrum.client.project.UsabilityMechanism> getUsabilityMechanismsByProject(scrum.client.project.Project project) {
+        List<scrum.client.project.UsabilityMechanism> ret = new ArrayList<scrum.client.project.UsabilityMechanism>();
+        for (scrum.client.project.UsabilityMechanism entity : usabilityMechanisms.values()) {
+            if (entity.isProject(project)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityMechanism> getUsabilityMechanismsByNumber(int number) {
+        List<scrum.client.project.UsabilityMechanism> ret = new ArrayList<scrum.client.project.UsabilityMechanism>();
+        for (scrum.client.project.UsabilityMechanism entity : usabilityMechanisms.values()) {
+            if (entity.isNumber(number)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityMechanism> getUsabilityMechanismsByLabel(java.lang.String label) {
+        List<scrum.client.project.UsabilityMechanism> ret = new ArrayList<scrum.client.project.UsabilityMechanism>();
+        for (scrum.client.project.UsabilityMechanism entity : usabilityMechanisms.values()) {
+            if (entity.isLabel(label)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityMechanism> getUsabilityMechanismsByDescription(java.lang.String description) {
+        List<scrum.client.project.UsabilityMechanism> ret = new ArrayList<scrum.client.project.UsabilityMechanism>();
+        for (scrum.client.project.UsabilityMechanism entity : usabilityMechanisms.values()) {
+            if (entity.isDescription(description)) ret.add(entity);
+        }
+        return ret;
+    }
+
     // --- User ---
 
     protected Map<String, scrum.client.admin.User> users = new HashMap<String, scrum.client.admin.User>();
@@ -3930,6 +4032,7 @@ public abstract class GDao
             clearSubscriptions();
             clearSystemConfigs();
             clearTasks();
+            clearUsabilityMechanisms();
             clearUsers();
             clearWikipages();
     }
@@ -3964,6 +4067,7 @@ public abstract class GDao
             entityMaps.add(subscriptions);
             entityMaps.add(systemConfigs);
             entityMaps.add(tasks);
+            entityMaps.add(usabilityMechanisms);
             entityMaps.add(users);
             entityMaps.add(wikipages);
         }
@@ -4044,6 +4148,9 @@ public abstract class GDao
         if (type.equals(scrum.client.sprint.Task.ENTITY_TYPE)) {
             return updateTask(data);
         }
+        if (type.equals(scrum.client.project.UsabilityMechanism.ENTITY_TYPE)) {
+            return updateUsabilityMechanism(data);
+        }
         if (type.equals(scrum.client.admin.User.ENTITY_TYPE)) {
             return updateUser(data);
         }
@@ -4080,6 +4187,7 @@ public abstract class GDao
         ret.put("Subscription", subscriptions.size());
         ret.put("SystemConfig", systemConfigs.size());
         ret.put("Task", tasks.size());
+        ret.put("UsabilityMechanism", usabilityMechanisms.size());
         ret.put("User", users.size());
         ret.put("Wikipage", wikipages.size());
         return ret;

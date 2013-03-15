@@ -14,6 +14,7 @@
  */
 package scrum.client.project;
 
+import ilarkesto.core.scope.Scope;
 import ilarkesto.gwt.client.AFieldValueWidget;
 import ilarkesto.gwt.client.AMultiSelectionViewEditWidget;
 import ilarkesto.gwt.client.AOutputViewEditWidget;
@@ -26,6 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 import scrum.client.ScrumGwt;
+import scrum.client.admin.Auth;
 import scrum.client.collaboration.CommentsWidget;
 import scrum.client.collaboration.EmoticonSelectorWidget;
 import scrum.client.common.AScrumWidget;
@@ -144,6 +146,40 @@ public class RequirementWidget extends AScrumWidget {
 		if (showChangeHistory) left.addRow(new ChangeHistoryWidget(requirement), 2);
 
 		TableBuilder right = ScrumGwt.createFieldTable();
+
+		right.addFieldRow("Usability Mechanisms", new AMultiSelectionViewEditWidget<UsabilityMechanism>() {
+
+			@Override
+			protected void onViewerUpdate() {
+				List<UsabilityMechanism> usms = new ArrayList<UsabilityMechanism>(requirement.getUsabilityMechanisms());
+				Collections.sort(usms);
+				setViewerItemsAsHtml(usms);
+			}
+
+			@Override
+			protected void onEditorUpdate() {
+				List<UsabilityMechanism> usms = new ArrayList<UsabilityMechanism>(requirement.getProject()
+						.getUsabilityMechanisms());
+				Collections.sort(usms);
+				setEditorItems(usms);
+				setEditorSelectedItems(requirement.getUsabilityMechanisms());
+			}
+
+			@Override
+			protected void onEditorSubmit() {
+				requirement.setUsabilityMechanisms(getEditorSelectedItems());
+			}
+
+			@Override
+			public boolean isEditable() {
+				if (requirement.isClosed()) return false;
+				if (!requirement.isInCurrentSprint()) return false;
+				if (!requirement.getProject().isProductOwner(Scope.get().getComponent(Auth.class).getUser()))
+					return false;
+				return true;
+			}
+		});
+
 		if (acceptReject && requirement.getProject().isProductOwner(getCurrentUser()) && requirement.isDecidable()) {
 			right.addRow(createActionsPanelForCompletedRequirement(requirement), 2);
 		}

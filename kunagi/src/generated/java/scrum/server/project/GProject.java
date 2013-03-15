@@ -53,6 +53,8 @@ public abstract class GProject extends AEntity implements ilarkesto.auth.ViewPro
 		properties.put("lastSprintNumber", this.lastSprintNumber);
 		properties.put("lastTaskNumber", this.lastTaskNumber);
 		properties.put("lastRequirementNumber", this.lastRequirementNumber);
+		properties.put("lastAcceptanceCriteriaNumber", this.lastAcceptanceCriteriaNumber);
+		properties.put("lastUsabilityMechanismNumber", this.lastUsabilityMechanismNumber);
 		properties.put("lastQualityNumber", this.lastQualityNumber);
 		properties.put("lastRiskNumber", this.lastRiskNumber);
 		properties.put("lastIssueNumber", this.lastIssueNumber);
@@ -92,6 +94,10 @@ public abstract class GProject extends AEntity implements ilarkesto.auth.ViewPro
 
 	public final java.util.Set<scrum.server.project.Quality> getQualitys() {
 		return qualityDao.getQualitysByProject((Project) this);
+	}
+
+	public final java.util.Set<scrum.server.project.UsabilityMechanism> getUsabilityMechanisms() {
+		return usabilityMechanismDao.getUsabilityMechanismsByProject((Project) this);
 	}
 
 	public final java.util.Set<scrum.server.impediments.Impediment> getImpediments() {
@@ -1354,6 +1360,36 @@ public abstract class GProject extends AEntity implements ilarkesto.auth.ViewPro
 	}
 
 	// -----------------------------------------------------------
+	// - lastUsabilityMechanismNumber
+	// -----------------------------------------------------------
+
+	private int lastUsabilityMechanismNumber;
+
+	public final int getLastUsabilityMechanismNumber() {
+		return lastUsabilityMechanismNumber;
+	}
+
+	public final void setLastUsabilityMechanismNumber(int lastUsabilityMechanismNumber) {
+		lastUsabilityMechanismNumber = prepareLastUsabilityMechanismNumber(lastUsabilityMechanismNumber);
+		if (isLastUsabilityMechanismNumber(lastUsabilityMechanismNumber)) return;
+		this.lastUsabilityMechanismNumber = lastUsabilityMechanismNumber;
+		updateLastModified();
+		fireModified("lastUsabilityMechanismNumber=" + lastUsabilityMechanismNumber);
+	}
+
+	protected int prepareLastUsabilityMechanismNumber(int lastUsabilityMechanismNumber) {
+		return lastUsabilityMechanismNumber;
+	}
+
+	public final boolean isLastUsabilityMechanismNumber(int lastUsabilityMechanismNumber) {
+		return this.lastUsabilityMechanismNumber == lastUsabilityMechanismNumber;
+	}
+
+	protected final void updateLastUsabilityMechanismNumber(Object value) {
+		setLastUsabilityMechanismNumber((Integer) value);
+	}
+
+	// -----------------------------------------------------------
 	// - lastQualityNumber
 	// -----------------------------------------------------------
 
@@ -2206,6 +2242,12 @@ public abstract class GProject extends AEntity implements ilarkesto.auth.ViewPro
 
 	public static final void setQualityDao(scrum.server.project.QualityDao qualityDao) {
 		GProject.qualityDao = qualityDao;
+	}
+
+	static scrum.server.project.UsabilityMechanismDao usabilityMechanismDao;
+
+	public static final void setUsabilityMechanismDao(scrum.server.project.UsabilityMechanismDao usabilityMechanismDao) {
+		GProject.usabilityMechanismDao = usabilityMechanismDao;
 	}
 
 	static scrum.server.impediments.ImpedimentDao impedimentDao;

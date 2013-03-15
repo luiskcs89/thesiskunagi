@@ -34,6 +34,7 @@ public class OpenProjectAction extends GOpenProjectAction {
 
 	@Override
 	protected void onExecute() {
+		project.addUsabilityMechanisms(); // Only adds them if they are not added
 		getNavigator().gotoProject(project.getId());
 	}
 

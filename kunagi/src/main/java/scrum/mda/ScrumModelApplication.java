@@ -381,6 +381,10 @@ public class ScrumModelApplication extends AGeneratorApplication {
 				"Qualities are non-functional or cross-story requirements. "
 						+ "Qualities linked to Stories indicate that not only the Story's requirements, "
 						+ "but also the Quality's requirements need to be met in order to complete a Story.");
+			requirementModel.addSetReference("usabilityMechanisms", getUsabilityMechanismModel()).setTooltip(
+				"Usability Mechanism are usability functionalities that are added to User Stories. "
+						+ "Usability Mechanism linked to Stories indicate that the Stroy will be affected "
+						+ "by adding, modifing or relating to it Tasks, Acceptance Criteria or other Stories");
 			requirementModel.addStringProperty("label").setMandatory(true).setEditablePredicate("editable")
 					.setSearchable(true).setTooltip(createLabelTooltipText("Story"));
 			requirementModel
@@ -477,6 +481,29 @@ public class ScrumModelApplication extends AGeneratorApplication {
 			qualityModel.addAction("DeleteQuality");
 		}
 		return qualityModel;
+	}
+
+	private EntityModel usabilityMechanismModel;
+
+	public EntityModel getUsabilityMechanismModel() {
+		if (usabilityMechanismModel == null) {
+			usabilityMechanismModel = createEntityModel("UsabilityMechanism", "project");
+			usabilityMechanismModel.setGwtSupport(true);
+			usabilityMechanismModel.addPredicate("editable");
+			usabilityMechanismModel.addReference("project", getProjectModel()).setMaster(true);
+			usabilityMechanismModel.addProperty("number", int.class);
+			usabilityMechanismModel.addStringProperty("label").setMandatory(true).setSearchable(true)
+					.setEditablePredicate("editable").setTooltip(createLabelTooltipText("Usability Mechanism"));
+			usabilityMechanismModel
+					.addStringProperty("description")
+					.setRichtext(true)
+					.setSearchable(true)
+					.setEditablePredicate("editable")
+					.setTooltip(
+						"The desctiption of an Usability Mechanism should give detailled information on "
+								+ "what the Usability Mechanism is about and how it affects Storys that reference it.");
+		}
+		return usabilityMechanismModel;
 	}
 
 	private EntityModel sprintModel;

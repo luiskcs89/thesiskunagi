@@ -523,6 +523,12 @@ public class Project extends GProject implements ForumSupport {
 		return item;
 	}
 
+	public UsabilityMechanism createNewUsabilityMechanism() {
+		UsabilityMechanism item = new UsabilityMechanism(this);
+		getDao().createUsabilityMechanism(item);
+		return item;
+	}
+
 	public void deleteRequirement(Requirement item) {
 		getDao().deleteRequirement(item);
 	}
@@ -714,5 +720,61 @@ public class Project extends GProject implements ForumSupport {
 
 		};
 		return freeDaysWeekdaySelectorModel;
+	}
+
+	public void addUsabilityMechanisms() {
+		if (getUsabilityMechanisms().isEmpty()) {
+			UsabilityMechanism systemStatus = createNewUsabilityMechanism();
+			systemStatus.setNumber(1);
+			systemStatus.setLabel("System Status");
+
+			UsabilityMechanism warning = createNewUsabilityMechanism();
+			warning.setNumber(2);
+			warning.setLabel("Warning");
+
+			UsabilityMechanism longAction = createNewUsabilityMechanism();
+			longAction.setNumber(3);
+			longAction.setLabel("Long Action");
+
+			UsabilityMechanism longActionAbort = createNewUsabilityMechanism();
+			longActionAbort.setNumber(4);
+			longActionAbort.setLabel("Long Action + Abort Command");
+
+			UsabilityMechanism abortOpertation = createNewUsabilityMechanism();
+			abortOpertation.setNumber(5);
+			abortOpertation.setLabel("Abort Operation");
+
+			UsabilityMechanism goBack = createNewUsabilityMechanism();
+			goBack.setNumber(6);
+			goBack.setLabel("Go back");
+
+			UsabilityMechanism textEntry = createNewUsabilityMechanism();
+			textEntry.setNumber(7);
+			textEntry.setLabel("Text Entry");
+
+			UsabilityMechanism undo = createNewUsabilityMechanism();
+			undo.setNumber(8);
+			undo.setLabel("Undo");
+
+			UsabilityMechanism undoReset = createNewUsabilityMechanism();
+			undoReset.setNumber(9);
+			undoReset.setLabel("Undo Reset");
+
+			UsabilityMechanism stepByStep = createNewUsabilityMechanism();
+			stepByStep.setNumber(10);
+			stepByStep.setLabel("Step by Step");
+
+			UsabilityMechanism preferences = createNewUsabilityMechanism();
+			preferences.setNumber(11);
+			preferences.setLabel("Preferences");
+
+			UsabilityMechanism favorites = createNewUsabilityMechanism();
+			favorites.setNumber(12);
+			favorites.setLabel("Favorites");
+
+			UsabilityMechanism help = createNewUsabilityMechanism();
+			help.setNumber(13);
+			help.setLabel("Help");
+		}
 	}
 }
