@@ -1,0 +1,34 @@
+package scrum.server.project;
+
+import ilarkesto.fp.Predicate;
+
+public class UsabilityRecommnendationDao extends GUsabilityRecommnendationDao {
+
+	public UsabilityRecommnendation getUsabilityRecommnendationByNumber(final int number, final Project project) {
+		return getEntity(new Predicate<UsabilityRecommnendation>() {
+
+			@Override
+			public boolean test(UsabilityRecommnendation t) {
+				return t.isNumber(number) && t.isProject(project);
+			}
+		});
+	}
+
+	@Override
+	public UsabilityMechanism newEntityInstance() {
+		UsabilityMechanism usm = super.newEntityInstance();
+		usm.setLabel("New UsabilityMechanism");
+		return usm;
+	}
+
+	// --- test data ---
+
+	public UsabilityMechanism postUsabilityMechanism(Project project, String label, String description) {
+		UsabilityMechanism usm = newEntityInstance();
+		usm.setProject(project);
+		usm.setLabel(label);
+		usm.setDescription(description);
+		saveEntity(usm);
+		return usm;
+	}
+}

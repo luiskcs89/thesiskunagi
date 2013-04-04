@@ -1,0 +1,23 @@
+package scrum.client.project;
+
+import java.util.List;
+
+
+public class UsabilityMechanismRecomendations {
+
+	public static List<UsabilityMechanismRecomendation> getRecomendations(Requirement req) {
+		
+		List<UsabilityMechanismRecomendation> recomendations = new ArrayList<UsabilityMechanismRecomendation>();
+		
+		for (UsabilityMechanism um : req.getProject().getUsabilityMechanisms()) {
+			if(req.containsUsabilityMechanism(um)) {
+				switch (um.getNumber()) {
+					case 1:
+						
+						break;
+				}
+			}
+		}
+		return null;
+	}
+}

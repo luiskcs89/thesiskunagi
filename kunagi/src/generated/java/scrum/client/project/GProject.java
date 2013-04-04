@@ -2383,6 +2383,10 @@ public abstract class GProject
         return getDao().getUsabilityMechanismsByProject((Project)this);
     }
 
+    public final java.util.List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendations() {
+        return getDao().getUsabilityRecommendationsByProject((Project)this);
+    }
+
     public final java.util.List<scrum.client.journal.ProjectEvent> getProjectEvents() {
         return getDao().getProjectEventsByProject((Project)this);
     }

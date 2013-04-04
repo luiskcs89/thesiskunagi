@@ -36,7 +36,7 @@ public class ProductBacklogPdfCreator extends APdfCreator {
 		Collections.sort(requirements, project.getRequirementsOrderComparator());
 		for (Requirement req : requirements) {
 			if (req.isClosed()) continue;
-			requirement(pdf, req, null, null, null);
+			requirement(pdf, req, null, null, null, null);
 		}
 	}
 

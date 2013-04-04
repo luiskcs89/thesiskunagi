@@ -1,0 +1,25 @@
+package scrum.client.project;
+
+import ilarkesto.core.html.ToHtmlSupport;
+
+enum AFFECTED_ENTITY {
+	ACCEPTANCE_CRITERIA, DEPENDENT_USABILITY_TASK, INDEPENDENT_USABILITY_TASK, USABILITY_USER_STORY,
+}
+
+public class UsabilityMechanismRecomendation implements ToHtmlSupport {
+
+	boolean add;
+	boolean edit;
+	String label;
+	UsabilityMechanism um;
+
+	@Override
+	public String toHtml() {
+		// TODO Auto-generated method stub
+		String html = "";
+		if (add) html += "Add ";
+		if (edit) html += "Modify ";
+		html += " - " + label;
+		return html;
+	}
+}

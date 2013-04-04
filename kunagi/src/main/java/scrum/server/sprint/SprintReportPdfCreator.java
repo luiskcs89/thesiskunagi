@@ -109,7 +109,8 @@ public class SprintReportPdfCreator extends APdfCreator {
 		if (requirements.isEmpty()) return;
 		sectionHeader(pdf, title);
 		for (Requirement req : requirements) {
-			requirement(pdf, req, report.getOpenTasks(req), report.getClosedTasks(req), req.getAcceptanceCriterias());
+			requirement(pdf, req, report.getOpenTasks(req), report.getClosedTasks(req), req.getAcceptanceCriterias(),
+				req.getUsabilityMechanisms());
 		}
 	}
 

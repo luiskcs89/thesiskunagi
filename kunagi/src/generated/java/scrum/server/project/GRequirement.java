@@ -44,6 +44,7 @@ public abstract class GRequirement
         properties.put("number", this.number);
         properties.put("qualitysIds", this.qualitysIds);
         properties.put("usabilityMechanismsIds", this.usabilityMechanismsIds);
+        properties.put("usabilityRecommendationsIds", this.usabilityRecommendationsIds);
         properties.put("label", this.label);
         properties.put("description", this.description);
         properties.put("testDescription", this.testDescription);
@@ -467,6 +468,96 @@ public abstract class GRequirement
     protected final void updateUsabilityMechanisms(Object value) {
         Collection<String> ids = (Collection<String>) value;
         setUsabilityMechanisms((java.util.Set) usabilityMechanismDao.getByIdsAsSet(ids));
+    }
+
+    // -----------------------------------------------------------
+    // - usabilityRecommendations
+    // -----------------------------------------------------------
+
+    private java.util.Set<String> usabilityRecommendationsIds = new java.util.HashSet<String>();
+
+    public final java.util.Set<scrum.server.project.UsabilityRecommendation> getUsabilityRecommendations() {
+        return (java.util.Set) usabilityRecommendationDao.getByIdsAsSet(this.usabilityRecommendationsIds);
+    }
+
+    public final void setUsabilityRecommendations(Collection<scrum.server.project.UsabilityRecommendation> usabilityRecommendations) {
+        usabilityRecommendations = prepareUsabilityRecommendations(usabilityRecommendations);
+        if (usabilityRecommendations == null) usabilityRecommendations = Collections.emptyList();
+        java.util.Set<String> ids = getIdsAsSet(usabilityRecommendations);
+        if (this.usabilityRecommendationsIds.equals(ids)) return;
+        this.usabilityRecommendationsIds = ids;
+        updateLastModified();
+        fireModified("usabilityRecommendations="+Str.format(usabilityRecommendations));
+    }
+
+    protected Collection<scrum.server.project.UsabilityRecommendation> prepareUsabilityRecommendations(Collection<scrum.server.project.UsabilityRecommendation> usabilityRecommendations) {
+        return usabilityRecommendations;
+    }
+
+    protected void repairDeadUsabilityRecommendationReference(String entityId) {
+        if (this.usabilityRecommendationsIds.remove(entityId)) fireModified("usabilityRecommendations-=" + entityId);
+    }
+
+    public final boolean containsUsabilityRecommendation(scrum.server.project.UsabilityRecommendation usabilityRecommendation) {
+        if (usabilityRecommendation == null) return false;
+        return this.usabilityRecommendationsIds.contains(usabilityRecommendation.getId());
+    }
+
+    public final int getUsabilityRecommendationsCount() {
+        return this.usabilityRecommendationsIds.size();
+    }
+
+    public final boolean isUsabilityRecommendationsEmpty() {
+        return this.usabilityRecommendationsIds.isEmpty();
+    }
+
+    public final boolean addUsabilityRecommendation(scrum.server.project.UsabilityRecommendation usabilityRecommendation) {
+        if (usabilityRecommendation == null) throw new IllegalArgumentException("usabilityRecommendation == null");
+        boolean added = this.usabilityRecommendationsIds.add(usabilityRecommendation.getId());
+        if (added) updateLastModified();
+        if (added) fireModified("usabilityRecommendations+=" + usabilityRecommendation);
+        return added;
+    }
+
+    public final boolean addUsabilityRecommendations(Collection<scrum.server.project.UsabilityRecommendation> usabilityRecommendations) {
+        if (usabilityRecommendations == null) throw new IllegalArgumentException("usabilityRecommendations == null");
+        boolean added = false;
+        for (scrum.server.project.UsabilityRecommendation usabilityRecommendation : usabilityRecommendations) {
+            added = added | this.usabilityRecommendationsIds.add(usabilityRecommendation.getId());
+        }
+        return added;
+    }
+
+    public final boolean removeUsabilityRecommendation(scrum.server.project.UsabilityRecommendation usabilityRecommendation) {
+        if (usabilityRecommendation == null) throw new IllegalArgumentException("usabilityRecommendation == null");
+        if (this.usabilityRecommendationsIds == null) return false;
+        boolean removed = this.usabilityRecommendationsIds.remove(usabilityRecommendation.getId());
+        if (removed) updateLastModified();
+        if (removed) fireModified("usabilityRecommendations-=" + usabilityRecommendation);
+        return removed;
+    }
+
+    public final boolean removeUsabilityRecommendations(Collection<scrum.server.project.UsabilityRecommendation> usabilityRecommendations) {
+        if (usabilityRecommendations == null) return false;
+        if (usabilityRecommendations.isEmpty()) return false;
+        boolean removed = false;
+        for (scrum.server.project.UsabilityRecommendation _element: usabilityRecommendations) {
+            removed = removed | removeUsabilityRecommendation(_element);
+        }
+        return removed;
+    }
+
+    public final boolean clearUsabilityRecommendations() {
+        if (this.usabilityRecommendationsIds.isEmpty()) return false;
+        this.usabilityRecommendationsIds.clear();
+        updateLastModified();
+        fireModified("usabilityRecommendations cleared");
+        return true;
+    }
+
+    protected final void updateUsabilityRecommendations(Object value) {
+        Collection<String> ids = (Collection<String>) value;
+        setUsabilityRecommendations((java.util.Set) usabilityRecommendationDao.getByIdsAsSet(ids));
     }
 
     // -----------------------------------------------------------
@@ -1017,6 +1108,7 @@ public abstract class GRequirement
             if (property.equals("number")) updateNumber(value);
             if (property.equals("qualitysIds")) updateQualitys(value);
             if (property.equals("usabilityMechanismsIds")) updateUsabilityMechanisms(value);
+            if (property.equals("usabilityRecommendationsIds")) updateUsabilityRecommendations(value);
             if (property.equals("label")) updateLabel(value);
             if (property.equals("description")) updateDescription(value);
             if (property.equals("testDescription")) updateTestDescription(value);
@@ -1041,6 +1133,8 @@ public abstract class GRequirement
         repairDeadQualityReference(entityId);
         if (this.usabilityMechanismsIds == null) this.usabilityMechanismsIds = new java.util.HashSet<String>();
         repairDeadUsabilityMechanismReference(entityId);
+        if (this.usabilityRecommendationsIds == null) this.usabilityRecommendationsIds = new java.util.HashSet<String>();
+        repairDeadUsabilityRecommendationReference(entityId);
         if (this.tasksOrderIds == null) this.tasksOrderIds = new java.util.ArrayList<java.lang.String>();
         if (this.themes == null) this.themes = new java.util.ArrayList<java.lang.String>();
         repairDeadEpicReference(entityId);
@@ -1092,6 +1186,16 @@ public abstract class GRequirement
                 repairDeadUsabilityMechanismReference(entityId);
             }
         }
+        if (this.usabilityRecommendationsIds == null) this.usabilityRecommendationsIds = new java.util.HashSet<String>();
+        Set<String> usabilityRecommendations = new HashSet<String>(this.usabilityRecommendationsIds);
+        for (String entityId : usabilityRecommendations) {
+            try {
+                usabilityRecommendationDao.getById(entityId);
+            } catch (EntityDoesNotExistException ex) {
+                LOG.info("Repairing dead usabilityRecommendation reference");
+                repairDeadUsabilityRecommendationReference(entityId);
+            }
+        }
         if (this.tasksOrderIds == null) this.tasksOrderIds = new java.util.ArrayList<java.lang.String>();
         if (this.themes == null) this.themes = new java.util.ArrayList<java.lang.String>();
         try {
@@ -1135,6 +1239,12 @@ public abstract class GRequirement
 
     public static final void setUsabilityMechanismDao(scrum.server.project.UsabilityMechanismDao usabilityMechanismDao) {
         GRequirement.usabilityMechanismDao = usabilityMechanismDao;
+    }
+
+    static scrum.server.project.UsabilityRecommendationDao usabilityRecommendationDao;
+
+    public static final void setUsabilityRecommendationDao(scrum.server.project.UsabilityRecommendationDao usabilityRecommendationDao) {
+        GRequirement.usabilityRecommendationDao = usabilityRecommendationDao;
     }
 
     static scrum.server.project.RequirementDao requirementDao;

@@ -277,6 +277,10 @@ public abstract class GUsabilityMechanism
         return getDao().getRequirementsByUsabilityMechanism((UsabilityMechanism)this);
     }
 
+    public final java.util.List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendations() {
+        return getDao().getUsabilityRecommendationsByUsabilityMechanism((UsabilityMechanism)this);
+    }
+
     @Override
     public boolean matchesKey(String key) {
         if (super.matchesKey(key)) return true;
