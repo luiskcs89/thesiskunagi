@@ -249,6 +249,39 @@ public abstract class GRequirement
     }
 
 
+    // --- usabilityRecommendations ---
+
+    private Set<String> usabilityRecommendationsIds = new HashSet<String>();
+
+    public final java.util.Set<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendations() {
+        if ( usabilityRecommendationsIds.isEmpty()) return Collections.emptySet();
+        return getDao().getUsabilityRecommendations(this.usabilityRecommendationsIds);
+    }
+
+    public final void setUsabilityRecommendations(Collection<scrum.client.project.UsabilityRecommendation> values) {
+        usabilityRecommendationsIds = ilarkesto.gwt.client.Gwt.getIdsAsSet(values);
+        propertyChanged("usabilityRecommendationsIds", this.usabilityRecommendationsIds);
+    }
+
+    public final void addUsabilityRecommendation(scrum.client.project.UsabilityRecommendation usabilityRecommendation) {
+        String id = usabilityRecommendation.getId();
+        if (usabilityRecommendationsIds.contains(id)) return;
+        usabilityRecommendationsIds.add(id);
+        propertyChanged("usabilityRecommendationsIds", this.usabilityRecommendationsIds);
+    }
+
+    public final void removeUsabilityRecommendation(scrum.client.project.UsabilityRecommendation usabilityRecommendation) {
+        String id = usabilityRecommendation.getId();
+        if (!usabilityRecommendationsIds.contains(id)) return;
+        usabilityRecommendationsIds.remove(id);
+        propertyChanged("usabilityRecommendationsIds", this.usabilityRecommendationsIds);
+    }
+
+    public final boolean containsUsabilityRecommendation(scrum.client.project.UsabilityRecommendation usabilityRecommendation) {
+        return usabilityRecommendationsIds.contains(usabilityRecommendation.getId());
+    }
+
+
     // --- label ---
 
     private java.lang.String label ;
@@ -828,6 +861,7 @@ public abstract class GRequirement
         number  = (Integer) props.get("number");
         qualitysIds = (Set<String>) props.get("qualitysIds");
         usabilityMechanismsIds = (Set<String>) props.get("usabilityMechanismsIds");
+        usabilityRecommendationsIds = (Set<String>) props.get("usabilityRecommendationsIds");
         label  = (java.lang.String) props.get("label");
         description  = (java.lang.String) props.get("description");
         testDescription  = (java.lang.String) props.get("testDescription");
@@ -853,6 +887,7 @@ public abstract class GRequirement
         properties.put("number", this.number);
         properties.put("qualitysIds", this.qualitysIds);
         properties.put("usabilityMechanismsIds", this.usabilityMechanismsIds);
+        properties.put("usabilityRecommendationsIds", this.usabilityRecommendationsIds);
         properties.put("label", this.label);
         properties.put("description", this.description);
         properties.put("testDescription", this.testDescription);

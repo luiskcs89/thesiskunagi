@@ -33,6 +33,7 @@ import scrum.server.issues.Issue;
 import scrum.server.project.Project;
 import scrum.server.project.Quality;
 import scrum.server.project.Requirement;
+import scrum.server.project.UsabilityMechanism;
 import scrum.server.release.Release;
 import scrum.server.sprint.AcceptanceCriteria;
 import scrum.server.sprint.Sprint;
@@ -91,12 +92,14 @@ public abstract class APdfCreator {
 	}
 
 	protected void requirement(APdfContainerElement pdf, Requirement req, Collection<Task> openTasks,
-			Collection<Task> closedTasks, Collection<AcceptanceCriteria> acceptanceCriterias) {
+			Collection<Task> closedTasks, Collection<AcceptanceCriteria> acceptanceCriterias,
+			Collection<UsabilityMechanism> usabilityMechanisms) {
 		requirement(pdf, req, openTasks, closedTasks, acceptanceCriterias, null);
 	}
 
 	protected void requirement(APdfContainerElement pdf, Requirement req, Collection<Task> openTasks,
-			Collection<Task> closedTasks, Collection<AcceptanceCriteria> acceptanceCriterias, Sprint pastSprint) {
+			Collection<Task> closedTasks, Collection<AcceptanceCriteria> acceptanceCriterias,
+			Collection<UsabilityMechanism> usabilityMechanisms, Sprint pastSprint) {
 		pdf.nl();
 
 		ATable table = pdf.table(3, 20, 3);
@@ -109,9 +112,11 @@ public abstract class APdfCreator {
 		richtextRow(table, "Story description", req.getDescription());
 		// richtextRow(table, "Acceptance tests", req.getTestDescription());
 
+		usabilityMechanismsRow(table, "Usability mechanisms", usabilityMechanisms);
+
 		tasksRow(table, "Closed tasks", closedTasks);
 		tasksRow(table, "Open tasks", openTasks);
-		acceptanceCriteriasRow(table, "AcceptanceCriteria", acceptanceCriterias);
+		acceptanceCriteriasRow(table, "Acceptance criteria", acceptanceCriterias);
 
 		table.createCellBorders(Color.GRAY, 0.2f);
 	}
@@ -135,6 +140,17 @@ public abstract class APdfCreator {
 		valueCell.paragraph().setDefaultFontStyle(miniLabelFont).text(label);
 
 		acceptanceCriterias(valueCell, acceptanceCriterias);
+		valueCell.setPaddingBottom(3);
+	}
+
+	private void usabilityMechanismsRow(ATable table, String label, Collection<UsabilityMechanism> usabilityMechanisms) {
+		if (usabilityMechanisms == null || usabilityMechanisms.isEmpty()) return;
+		ARow row = table.row();
+
+		ACell valueCell = row.cell().setColspan(3);
+		valueCell.paragraph().setDefaultFontStyle(miniLabelFont).text(label);
+
+		usabilityMechanisms(valueCell, usabilityMechanisms);
 		valueCell.setPaddingBottom(3);
 	}
 
@@ -173,6 +189,20 @@ public abstract class APdfCreator {
 
 			if (acceptanceCriteria.isDescriptionSet())
 				richtextRow(table, "Description", acceptanceCriteria.getDescription());
+
+			table.createCellBorders(Color.LIGHT_GRAY, 0.2f);
+		}
+
+	}
+
+	private void usabilityMechanisms(APdfContainerElement container, Collection<UsabilityMechanism> usabilityMechanisms) {
+		for (UsabilityMechanism usabilityMechanism : usabilityMechanisms) {
+			container.nl(miniLabelFont);
+			ATable table = container.table(3, 20);
+
+			ARow rowHeader = table.row().setDefaultBackgroundColor(new Color(223, 223, 223));
+			rowHeader.cell().setFontStyle(referenceFont).text(usabilityMechanism.getReference());
+			rowHeader.cell().setFontStyle(new FontStyle(defaultFont).setBold(true)).text(usabilityMechanism.getLabel());
 
 			table.createCellBorders(Color.LIGHT_GRAY, 0.2f);
 		}

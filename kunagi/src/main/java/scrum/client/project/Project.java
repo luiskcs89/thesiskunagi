@@ -529,6 +529,12 @@ public class Project extends GProject implements ForumSupport {
 		return item;
 	}
 
+	public UsabilityRecommendation createNewUsabilityRecommendation() {
+		UsabilityRecommendation item = new UsabilityRecommendation(this);
+		getDao().createUsabilityRecommendation(item);
+		return item;
+	}
+
 	public void deleteRequirement(Requirement item) {
 		getDao().deleteRequirement(item);
 	}
@@ -722,59 +728,473 @@ public class Project extends GProject implements ForumSupport {
 		return freeDaysWeekdaySelectorModel;
 	}
 
+	// Affected entities: 0=Acceptance Criteria, 1=Dependent Usability Task, 2=Independent Usability Task,
+	// 3=User Story
+
+	public final int ACCEPTANCE_CRITERIA = 0;
+	public final int DEPENDENT_USABILITY_TASK = 1;
+	public final int INDEPENDENT_USABILITY_TASK = 2;
+	public final int USER_STORY = 3;
+
 	public void addUsabilityMechanisms() {
 		if (getUsabilityMechanisms().isEmpty()) {
+
+			// System Status
 			UsabilityMechanism systemStatus = createNewUsabilityMechanism();
 			systemStatus.setNumber(1);
 			systemStatus.setLabel("System Status");
+			systemStatus.setDescription("To inform users about the internal status of the system");
 
+			UsabilityRecommendation systemStatus1 = createNewUsabilityRecommendation();
+			systemStatus1.setUsabilityMechanism(systemStatus);
+			systemStatus1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			systemStatus1.setCreates(false);
+			systemStatus1.setModifies(true);
+			systemStatus1.setLabel("Check that the confirmation message appears when the operation is succesful");
+
+			UsabilityRecommendation systemStatus2 = createNewUsabilityRecommendation();
+			systemStatus2.setUsabilityMechanism(systemStatus);
+			systemStatus2.setEntityAffected(ACCEPTANCE_CRITERIA);
+			systemStatus2.setCreates(true);
+			systemStatus2.setModifies(false);
+			systemStatus2
+					.setLabel("Check that the error message appears when the operation fails. (One Acceptance Criteria for each possible failure)");
+
+			UsabilityRecommendation systemStatus3 = createNewUsabilityRecommendation();
+			systemStatus3.setUsabilityMechanism(systemStatus);
+			systemStatus3.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			systemStatus3.setCreates(true);
+			systemStatus3.setModifies(true);
+			systemStatus3.setLabel("Indicate error/confirmation message in the corresponding action");
+
+			// Warning
 			UsabilityMechanism warning = createNewUsabilityMechanism();
 			warning.setNumber(2);
 			warning.setLabel("Warning");
+			warning.setDescription("To inform users of any action with important consequences");
 
+			UsabilityRecommendation warning1 = createNewUsabilityRecommendation();
+			warning1.setNumber(1);
+			warning1.setUsabilityMechanism(warning);
+			warning1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			warning1.setCreates(false);
+			warning1.setModifies(true);
+			warning1.setLabel("Check the warning window emergence in the corresponding functionality");
+
+			UsabilityRecommendation warning2 = createNewUsabilityRecommendation();
+			warning2.setNumber(2);
+			warning2.setUsabilityMechanism(warning);
+			warning2.setEntityAffected(ACCEPTANCE_CRITERIA);
+			warning2.setCreates(true);
+			warning2.setModifies(false);
+			warning2.setLabel("Check the obtrusive behavior of the window");
+
+			UsabilityRecommendation warning3 = createNewUsabilityRecommendation();
+			warning3.setNumber(3);
+			warning3.setUsabilityMechanism(warning);
+			warning3.setEntityAffected(ACCEPTANCE_CRITERIA);
+			warning3.setCreates(true);
+			warning3.setModifies(false);
+			warning3.setLabel("Check the functionality of the “Cancel” button of the warning window");
+
+			UsabilityRecommendation warning4 = createNewUsabilityRecommendation();
+			warning4.setNumber(4);
+			warning4.setUsabilityMechanism(warning);
+			warning4.setEntityAffected(ACCEPTANCE_CRITERIA);
+			warning4.setCreates(true);
+			warning4.setModifies(false);
+			warning4.setLabel("Check the functionality of the “Accept” button of the warning window");
+
+			UsabilityRecommendation warning5 = createNewUsabilityRecommendation();
+			warning5.setNumber(5);
+			warning5.setUsabilityMechanism(warning);
+			warning5.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			warning5.setCreates(true);
+			warning5.setModifies(true);
+			warning5.setLabel("Relate warning to the corresponding functionality");
+
+			UsabilityRecommendation warning6 = createNewUsabilityRecommendation();
+			warning6.setNumber(6);
+			warning6.setUsabilityMechanism(warning);
+			warning6.setEntityAffected(USER_STORY);
+			warning6.setCreates(true);
+			warning6.setModifies(true);
+			warning6.setLabel("Implementation of warning window");
+
+			// Long Action
 			UsabilityMechanism longAction = createNewUsabilityMechanism();
 			longAction.setNumber(3);
 			longAction.setLabel("Long Action");
+			longAction
+					.setDescription("To inform users that the system is processing an action that will take some time to complete");
 
+			UsabilityRecommendation longAction1 = createNewUsabilityRecommendation();
+			longAction1.setNumber(7);
+			longAction1.setUsabilityMechanism(longAction);
+			longAction1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longAction1.setCreates(true);
+			longAction1.setModifies(false);
+			longAction1.setLabel("Check the emergence of the progress window");
+
+			UsabilityRecommendation longAction2 = createNewUsabilityRecommendation();
+			longAction2.setNumber(8);
+			longAction2.setUsabilityMechanism(longAction);
+			longAction2.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longAction2.setCreates(true);
+			longAction2.setModifies(false);
+			longAction2.setLabel("Check the obtrusiveness of the progress window");
+
+			UsabilityRecommendation longAction3 = createNewUsabilityRecommendation();
+			longAction3.setNumber(9);
+			longAction3.setUsabilityMechanism(longAction);
+			longAction3.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longAction3.setCreates(true);
+			longAction3.setModifies(false);
+			longAction3.setLabel("Check that the progress window works properly");
+
+			UsabilityRecommendation longAction4 = createNewUsabilityRecommendation();
+			longAction4.setNumber(10);
+			longAction4.setUsabilityMechanism(longAction);
+			longAction4.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longAction4.setCreates(true);
+			longAction4.setModifies(false);
+			longAction4
+					.setLabel("Check that the progress information disappear when the corresponding functionality finishes");
+
+			UsabilityRecommendation longAction5 = createNewUsabilityRecommendation();
+			longAction5.setNumber(11);
+			longAction5.setUsabilityMechanism(longAction);
+			longAction5.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			longAction5.setCreates(true);
+			longAction5.setModifies(false);
+			longAction5.setLabel("Relate the progress window with the corresponding functionality ");
+
+			UsabilityRecommendation longAction6 = createNewUsabilityRecommendation();
+			longAction6.setNumber(12);
+			longAction6.setUsabilityMechanism(longAction);
+			longAction6.setEntityAffected(USER_STORY);
+			longAction6.setCreates(true);
+			longAction6.setModifies(true);
+			longAction6
+					.setLabel("Implementation of the obstrusive progress window that shows the evolution of a long task in order to keep the user informed about the advance of the long action");
+
+			// Long Action + Abort Command
 			UsabilityMechanism longActionAbort = createNewUsabilityMechanism();
 			longActionAbort.setNumber(4);
 			longActionAbort.setLabel("Long Action + Abort Command");
 
+			UsabilityRecommendation longActionAbort1 = createNewUsabilityRecommendation();
+			longActionAbort1.setNumber(13);
+			longActionAbort1.setUsabilityMechanism(longActionAbort);
+			longActionAbort1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longActionAbort1.setCreates(true);
+			longActionAbort1.setModifies(false);
+			longActionAbort1.setLabel("Check the emergence of the progress window");
+
+			UsabilityRecommendation longActionAbort2 = createNewUsabilityRecommendation();
+			longActionAbort2.setNumber(14);
+			longActionAbort2.setUsabilityMechanism(longActionAbort);
+			longActionAbort2.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longActionAbort2.setCreates(true);
+			longActionAbort2.setModifies(false);
+			longActionAbort2.setLabel("Check the obtrusiveness of the progress window");
+
+			UsabilityRecommendation longActionAbort3 = createNewUsabilityRecommendation();
+			longActionAbort3.setNumber(15);
+			longActionAbort3.setUsabilityMechanism(longActionAbort);
+			longActionAbort3.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longActionAbort3.setCreates(true);
+			longActionAbort3.setModifies(false);
+			longActionAbort3.setLabel("Check that the progress window works properly");
+
+			UsabilityRecommendation longActionAbort4 = createNewUsabilityRecommendation();
+			longActionAbort4.setNumber(16);
+			longActionAbort4.setUsabilityMechanism(longActionAbort);
+			longActionAbort4.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longActionAbort4.setCreates(true);
+			longActionAbort4.setModifies(false);
+			longActionAbort4
+					.setLabel("Check that the progress information disappear when the corresponding functionality finishes");
+
+			UsabilityRecommendation longActionAbort5 = createNewUsabilityRecommendation();
+			longActionAbort5.setNumber(17);
+			longActionAbort5.setUsabilityMechanism(longActionAbort);
+			longActionAbort5.setEntityAffected(ACCEPTANCE_CRITERIA);
+			longActionAbort5.setCreates(true);
+			longActionAbort5.setModifies(false);
+			longActionAbort5.setLabel("Check that the usability functionality to abort the operation works properly");
+
+			UsabilityRecommendation longActionAbort6 = createNewUsabilityRecommendation();
+			longActionAbort6.setNumber(18);
+			longActionAbort6.setUsabilityMechanism(longActionAbort);
+			longActionAbort6.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			longActionAbort6.setCreates(true);
+			longActionAbort6.setModifies(false);
+			longActionAbort6.setLabel("Relate the progress window with the corresponding functionality ");
+
+			UsabilityRecommendation longActionAbort7 = createNewUsabilityRecommendation();
+			longActionAbort7.setNumber(19);
+			longActionAbort7.setUsabilityMechanism(longActionAbort);
+			longActionAbort7.setEntityAffected(USER_STORY);
+			longActionAbort7.setCreates(true);
+			longActionAbort7.setModifies(true);
+			longActionAbort7
+					.setLabel("Implementation of the obstrusive progress window that shows the evolution of a long task and gives the option to cancel the task in order to keep the user informed about the advance of the long action and let him cancel it if he needs to");
+
+			// Abort Operation
 			UsabilityMechanism abortOpertation = createNewUsabilityMechanism();
 			abortOpertation.setNumber(5);
 			abortOpertation.setLabel("Abort Operation");
 
+			UsabilityRecommendation abortOpertation1 = createNewUsabilityRecommendation();
+			abortOpertation1.setNumber(20);
+			abortOpertation1.setUsabilityMechanism(abortOpertation);
+			abortOpertation1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			abortOpertation1.setCreates(true);
+			abortOpertation1.setModifies(false);
+			abortOpertation1.setLabel("Check that the usability functionality to abort the operation works properly");
+
+			UsabilityRecommendation abortOpertation2 = createNewUsabilityRecommendation();
+			abortOpertation2.setNumber(21);
+			abortOpertation2.setUsabilityMechanism(abortOpertation);
+			abortOpertation2.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			abortOpertation2.setCreates(true);
+			abortOpertation2.setModifies(true);
+			abortOpertation2.setLabel("Add the usability functionality to abort the operation (cancel button)");
+
+			// Go Back
 			UsabilityMechanism goBack = createNewUsabilityMechanism();
 			goBack.setNumber(6);
 			goBack.setLabel("Go back");
 
+			UsabilityRecommendation goBack1 = createNewUsabilityRecommendation();
+			goBack1.setNumber(22);
+			goBack1.setUsabilityMechanism(goBack);
+			goBack1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			goBack1.setCreates(true);
+			goBack1.setModifies(false);
+			goBack1.setLabel("Check that the usability functionality to go back works properly");
+
+			UsabilityRecommendation goBack2 = createNewUsabilityRecommendation();
+			goBack2.setNumber(23);
+			goBack2.setUsabilityMechanism(goBack);
+			goBack2.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			goBack2.setCreates(true);
+			goBack2.setModifies(true);
+			goBack2.setLabel("Add the usability functionality of go back (go back button)");
+
+			// Text Entry
 			UsabilityMechanism textEntry = createNewUsabilityMechanism();
 			textEntry.setNumber(7);
 			textEntry.setLabel("Text Entry");
 
+			UsabilityRecommendation textEntry1 = createNewUsabilityRecommendation();
+			textEntry1.setNumber(24);
+			textEntry1.setUsabilityMechanism(textEntry);
+			textEntry1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			textEntry1.setCreates(true);
+			textEntry1.setModifies(false);
+			textEntry1
+					.setLabel("For each text entry field, check the emergence of the facilities that will help the user to avoid mistakes when writing");
+
+			UsabilityRecommendation textEntry2 = createNewUsabilityRecommendation();
+			textEntry2.setNumber(25);
+			textEntry2.setUsabilityMechanism(textEntry);
+			textEntry2.setEntityAffected(ACCEPTANCE_CRITERIA);
+			textEntry2.setCreates(true);
+			textEntry2.setModifies(false);
+			textEntry2.setLabel("For each text entry field, check that the facility works");
+
+			UsabilityRecommendation textEntry3 = createNewUsabilityRecommendation();
+			textEntry3.setNumber(26);
+			textEntry3.setUsabilityMechanism(textEntry);
+			textEntry3.setEntityAffected(INDEPENDENT_USABILITY_TASK);
+			textEntry3.setCreates(true);
+			textEntry3.setModifies(true);
+			textEntry3
+					.setLabel("For each text entry field, show the facilities that will help the user to avoid mistakes when writing");
+
+			// Undo
 			UsabilityMechanism undo = createNewUsabilityMechanism();
 			undo.setNumber(8);
 			undo.setLabel("Undo");
 
+			UsabilityRecommendation undo1 = createNewUsabilityRecommendation();
+			undo1.setNumber(27);
+			undo1.setUsabilityMechanism(undo);
+			undo1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			undo1.setCreates(true);
+			undo1.setModifies(false);
+			undo1.setLabel("Check that the undo button is enabled, when there are actions in the stack");
+
+			UsabilityRecommendation undo2 = createNewUsabilityRecommendation();
+			undo2.setNumber(28);
+			undo2.setUsabilityMechanism(undo);
+			undo2.setEntityAffected(ACCEPTANCE_CRITERIA);
+			undo2.setCreates(true);
+			undo2.setModifies(false);
+			undo2.setLabel("Check that the undo button is enabled, when there are no actions in the stack");
+
+			UsabilityRecommendation undo3 = createNewUsabilityRecommendation();
+			undo3.setNumber(29);
+			undo3.setUsabilityMechanism(undo);
+			undo3.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			undo3.setCreates(true);
+			undo3.setModifies(true);
+			undo3.setLabel("Add Undo button to the GUI");
+
+			UsabilityRecommendation undo4 = createNewUsabilityRecommendation();
+			undo4.setNumber(30);
+			undo4.setUsabilityMechanism(undo);
+			undo4.setEntityAffected(INDEPENDENT_USABILITY_TASK);
+			undo4.setCreates(true);
+			undo4.setModifies(false);
+			undo4.setLabel("Update undo stack");
+
+			UsabilityRecommendation undo5 = createNewUsabilityRecommendation();
+			undo5.setNumber(31);
+			undo5.setUsabilityMechanism(undo);
+			undo5.setEntityAffected(USER_STORY);
+			undo5.setCreates(true);
+			undo5.setModifies(false);
+			undo5.setLabel("Undo stack creation");
+
+			UsabilityRecommendation undo6 = createNewUsabilityRecommendation();
+			undo6.setNumber(32);
+			undo6.setUsabilityMechanism(undo);
+			undo6.setEntityAffected(USER_STORY);
+			undo6.setCreates(true);
+			undo6.setModifies(false);
+			undo6.setLabel("Undo operation");
+
+			// Undo Reset
 			UsabilityMechanism undoReset = createNewUsabilityMechanism();
 			undoReset.setNumber(9);
 			undoReset.setLabel("Undo Reset");
 
+			UsabilityRecommendation undoReset1 = createNewUsabilityRecommendation();
+			undoReset1.setNumber(33);
+			undoReset1.setUsabilityMechanism(undoReset);
+			undoReset1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			undoReset1.setCreates(true);
+			undoReset1.setModifies(false);
+			undoReset1.setLabel("Check that the reset functionality is working properly");
+
+			UsabilityRecommendation undoReset2 = createNewUsabilityRecommendation();
+			undoReset2.setNumber(34);
+			undoReset2.setUsabilityMechanism(undoReset);
+			undoReset2.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			undoReset2.setCreates(true);
+			undoReset2.setModifies(true);
+			undoReset2.setLabel("Add the functionality to reset (reset button)");
+
+			// Step by Step
 			UsabilityMechanism stepByStep = createNewUsabilityMechanism();
 			stepByStep.setNumber(10);
 			stepByStep.setLabel("Step by Step");
 
+			UsabilityRecommendation stepByStep1 = createNewUsabilityRecommendation();
+			stepByStep1.setNumber(35);
+			stepByStep1.setUsabilityMechanism(stepByStep);
+			stepByStep1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			stepByStep1.setCreates(true);
+			stepByStep1.setModifies(false);
+			stepByStep1.setLabel("Check the transition after each step (one for each step)");
+
+			UsabilityRecommendation stepByStep2 = createNewUsabilityRecommendation();
+			stepByStep2.setNumber(36);
+			stepByStep2.setUsabilityMechanism(stepByStep);
+			stepByStep2.setEntityAffected(INDEPENDENT_USABILITY_TASK);
+			stepByStep2.setCreates(true);
+			stepByStep2.setModifies(false);
+			stepByStep2.setLabel("Develop each step of the process (one task for each step)");
+
+			// Preferences
 			UsabilityMechanism preferences = createNewUsabilityMechanism();
 			preferences.setNumber(11);
 			preferences.setLabel("Preferences");
 
+			UsabilityRecommendation preferences1 = createNewUsabilityRecommendation();
+			preferences1.setNumber(37);
+			preferences1.setUsabilityMechanism(preferences);
+			preferences1.setEntityAffected(USER_STORY);
+			preferences1.setCreates(true);
+			preferences1.setModifies(false);
+			preferences1.setLabel("As a user I want to set up the preferences");
+
+			// Favorites
 			UsabilityMechanism favorites = createNewUsabilityMechanism();
 			favorites.setNumber(12);
 			favorites.setLabel("Favorites");
 
+			UsabilityRecommendation favorites1 = createNewUsabilityRecommendation();
+			favorites1.setNumber(38);
+			favorites1.setUsabilityMechanism(favorites);
+			favorites1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			favorites1.setCreates(true);
+			favorites1.setModifies(false);
+			favorites1.setLabel("Check that the favourites button is enabled");
+
+			UsabilityRecommendation favorites2 = createNewUsabilityRecommendation();
+			favorites2.setNumber(39);
+			favorites2.setUsabilityMechanism(favorites);
+			favorites2.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			favorites2.setCreates(true);
+			favorites2.setModifies(true);
+			favorites2.setLabel("Add the favourites button in the GUI");
+
+			UsabilityRecommendation favorites3 = createNewUsabilityRecommendation();
+			favorites3.setNumber(40);
+			favorites3.setUsabilityMechanism(favorites);
+			favorites3.setEntityAffected(USER_STORY);
+			favorites3.setCreates(true);
+			favorites3.setModifies(false);
+			favorites3.setLabel("Implementation of favourites list");
+
+			UsabilityRecommendation favorites4 = createNewUsabilityRecommendation();
+			favorites4.setNumber(41);
+			favorites4.setUsabilityMechanism(favorites);
+			favorites4.setEntityAffected(USER_STORY);
+			favorites4.setCreates(true);
+			favorites4.setModifies(false);
+			favorites4.setLabel("Implementation of the use of the favourite links");
+
+			// Help
 			UsabilityMechanism help = createNewUsabilityMechanism();
 			help.setNumber(13);
 			help.setLabel("Help");
+
+			UsabilityRecommendation help1 = createNewUsabilityRecommendation();
+			help1.setNumber(38);
+			help1.setUsabilityMechanism(help);
+			help1.setEntityAffected(ACCEPTANCE_CRITERIA);
+			help1.setCreates(true);
+			help1.setModifies(false);
+			help1.setLabel("Check that the help button is enabled");
+
+			UsabilityRecommendation help2 = createNewUsabilityRecommendation();
+			help2.setNumber(41);
+			help2.setUsabilityMechanism(help);
+			help2.setEntityAffected(DEPENDENT_USABILITY_TASK);
+			help2.setCreates(true);
+			help2.setModifies(true);
+			help2.setLabel("Add Help button to the GUI");
+
+			UsabilityRecommendation help3 = createNewUsabilityRecommendation();
+			help3.setNumber(42);
+			help3.setUsabilityMechanism(help);
+			help3.setEntityAffected(USER_STORY);
+			help3.setCreates(true);
+			help3.setModifies(false);
+			help3.setLabel("Implementation of the help functionality");
+
+			UsabilityRecommendation help4 = createNewUsabilityRecommendation();
+			help4.setNumber(43);
+			help4.setUsabilityMechanism(help);
+			help4.setEntityAffected(USER_STORY);
+			help4.setCreates(true);
+			help4.setModifies(false);
+			help4.setLabel("Implementation of the use of the help functionality");
 		}
 	}
 }

@@ -385,6 +385,10 @@ public class ScrumModelApplication extends AGeneratorApplication {
 				"Usability Mechanism are usability functionalities that are added to User Stories. "
 						+ "Usability Mechanism linked to Stories indicate that the Stroy will be affected "
 						+ "by adding, modifing or relating to it Tasks, Acceptance Criteria or other Stories");
+			requirementModel.addSetReference("usabilityRecommendations", getUsabilityRecommendationModel()).setTooltip(
+				"Usability Recommendations are added by Usability Mechanisms. "
+						+ "Usability Recommendations are the effects of a Usability Mechanism and affect Stories "
+						+ "by adding, modifing or relating to it Tasks, Acceptance Criteria or other Stories");
 			requirementModel.addStringProperty("label").setMandatory(true).setEditablePredicate("editable")
 					.setSearchable(true).setTooltip(createLabelTooltipText("Story"));
 			requirementModel
@@ -504,6 +508,25 @@ public class ScrumModelApplication extends AGeneratorApplication {
 								+ "what the Usability Mechanism is about and how it affects Storys that reference it.");
 		}
 		return usabilityMechanismModel;
+	}
+
+	private EntityModel usabilityRecommendationModel;
+
+	public EntityModel getUsabilityRecommendationModel() {
+		if (usabilityRecommendationModel == null) {
+			usabilityRecommendationModel = createEntityModel("UsabilityRecommendation", "project");
+			usabilityRecommendationModel.setGwtSupport(true);
+			usabilityRecommendationModel.addPredicate("editable");
+			usabilityRecommendationModel.addReference("project", getProjectModel()).setMaster(true);
+			usabilityRecommendationModel.addProperty("number", int.class);
+			usabilityRecommendationModel.addStringProperty("label").setMandatory(true).setSearchable(true)
+					.setEditablePredicate("editable").setTooltip(createLabelTooltipText("Usability Recommendation"));
+			usabilityRecommendationModel.addProperty("creates", boolean.class);
+			usabilityRecommendationModel.addProperty("modifies", boolean.class);
+			usabilityRecommendationModel.addProperty("entityAffected", int.class);
+			usabilityRecommendationModel.addReference("usabilityMechanism", getUsabilityMechanismModel());
+		}
+		return usabilityRecommendationModel;
 	}
 
 	private EntityModel sprintModel;

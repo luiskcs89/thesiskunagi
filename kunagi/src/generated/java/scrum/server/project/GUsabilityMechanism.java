@@ -52,6 +52,10 @@ public abstract class GUsabilityMechanism
         return requirementDao.getRequirementsByUsabilityMechanism((UsabilityMechanism)this);
     }
 
+    public final java.util.Set<scrum.server.project.UsabilityRecommendation> getUsabilityRecommendations() {
+        return usabilityRecommendationDao.getUsabilityRecommendationsByUsabilityMechanism((UsabilityMechanism)this);
+    }
+
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GUsabilityMechanism.class);
 
     public static final String TYPE = "usabilityMechanism";
@@ -276,6 +280,12 @@ public abstract class GUsabilityMechanism
 
     public static final void setRequirementDao(scrum.server.project.RequirementDao requirementDao) {
         GUsabilityMechanism.requirementDao = requirementDao;
+    }
+
+    static scrum.server.project.UsabilityRecommendationDao usabilityRecommendationDao;
+
+    public static final void setUsabilityRecommendationDao(scrum.server.project.UsabilityRecommendationDao usabilityRecommendationDao) {
+        GUsabilityMechanism.usabilityRecommendationDao = usabilityRecommendationDao;
     }
 
 }

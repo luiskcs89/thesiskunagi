@@ -53,6 +53,8 @@ public abstract class GRequirementDao
         qualitysCache = null;
         requirementsByUsabilityMechanismCache.clear();
         usabilityMechanismsCache = null;
+        requirementsByUsabilityRecommendationCache.clear();
+        usabilityRecommendationsCache = null;
         requirementsByLabelCache.clear();
         labelsCache = null;
         requirementsByDescriptionCache.clear();
@@ -327,6 +329,46 @@ public abstract class GRequirementDao
 
         public boolean test(Requirement e) {
             return e.containsUsabilityMechanism(value);
+        }
+
+    }
+
+    // -----------------------------------------------------------
+    // - usabilityRecommendations
+    // -----------------------------------------------------------
+
+    private final Cache<scrum.server.project.UsabilityRecommendation,Set<Requirement>> requirementsByUsabilityRecommendationCache = new Cache<scrum.server.project.UsabilityRecommendation,Set<Requirement>>(
+            new Cache.Factory<scrum.server.project.UsabilityRecommendation,Set<Requirement>>() {
+                public Set<Requirement> create(scrum.server.project.UsabilityRecommendation usabilityRecommendation) {
+                    return getEntities(new ContainsUsabilityRecommendation(usabilityRecommendation));
+                }
+            });
+
+    public final Set<Requirement> getRequirementsByUsabilityRecommendation(scrum.server.project.UsabilityRecommendation usabilityRecommendation) {
+        return new HashSet<Requirement>(requirementsByUsabilityRecommendationCache.get(usabilityRecommendation));
+    }
+    private Set<scrum.server.project.UsabilityRecommendation> usabilityRecommendationsCache;
+
+    public final Set<scrum.server.project.UsabilityRecommendation> getUsabilityRecommendations() {
+        if (usabilityRecommendationsCache == null) {
+            usabilityRecommendationsCache = new HashSet<scrum.server.project.UsabilityRecommendation>();
+            for (Requirement e : getEntities()) {
+                usabilityRecommendationsCache.addAll(e.getUsabilityRecommendations());
+            }
+        }
+        return usabilityRecommendationsCache;
+    }
+
+    private static class ContainsUsabilityRecommendation implements Predicate<Requirement> {
+
+        private scrum.server.project.UsabilityRecommendation value;
+
+        public ContainsUsabilityRecommendation(scrum.server.project.UsabilityRecommendation value) {
+            this.value = value;
+        }
+
+        public boolean test(Requirement e) {
+            return e.containsUsabilityRecommendation(value);
         }
 
     }
@@ -810,6 +852,12 @@ public abstract class GRequirementDao
 
     public void setUsabilityMechanismDao(scrum.server.project.UsabilityMechanismDao usabilityMechanismDao) {
         this.usabilityMechanismDao = usabilityMechanismDao;
+    }
+
+    scrum.server.project.UsabilityRecommendationDao usabilityRecommendationDao;
+
+    public void setUsabilityRecommendationDao(scrum.server.project.UsabilityRecommendationDao usabilityRecommendationDao) {
+        this.usabilityRecommendationDao = usabilityRecommendationDao;
     }
 
 }

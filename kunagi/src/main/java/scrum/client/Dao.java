@@ -47,6 +47,7 @@ import scrum.client.pr.BlogEntry;
 import scrum.client.project.Quality;
 import scrum.client.project.Requirement;
 import scrum.client.project.UsabilityMechanism;
+import scrum.client.project.UsabilityRecommendation;
 import scrum.client.release.Release;
 import scrum.client.risks.Risk;
 import scrum.client.sprint.AcceptanceCriteria;
@@ -69,6 +70,7 @@ public class Dao extends GDao {
 		clearImpediments();
 		clearQualitys();
 		clearUsabilityMechanisms();
+		clearUsabilityRecommendations();
 		clearRequirements();
 		clearRisks();
 		clearSprints();
@@ -103,7 +105,12 @@ public class Dao extends GDao {
 
 		int number = Integer.parseInt(reference.substring(Requirement.REFERENCE_PREFIX.length()));
 
-		if (reference.startsWith(UsabilityMechanism.REFERENCE_PREFIX)) {
+		if (reference.startsWith(UsabilityRecommendation.REFERENCE_PREFIX)) {
+			for (UsabilityRecommendation e : getUsabilityRecommendations()) {
+				if (e.isNumber(number)) return e;
+			}
+			return null;
+		} else if (reference.startsWith(UsabilityMechanism.REFERENCE_PREFIX)) {
 			for (UsabilityMechanism e : getUsabilityMechanisms()) {
 				if (e.isNumber(number)) return e;
 			}

@@ -16,7 +16,9 @@ package scrum.client.sprint;
 
 import ilarkesto.gwt.client.AnchorPanel;
 import ilarkesto.gwt.client.ButtonWidget;
+import ilarkesto.gwt.client.DropdownMenuButtonWidget;
 import ilarkesto.gwt.client.Gwt;
+import ilarkesto.gwt.client.TableBuilder;
 import ilarkesto.gwt.client.animation.AnimatingFlowPanel.InsertCallback;
 
 import java.util.List;
@@ -36,9 +38,12 @@ import scrum.client.project.RemoveRequirementFromSprintAction;
 import scrum.client.project.ReopenRequirementAction;
 import scrum.client.project.Requirement;
 import scrum.client.project.RequirementWidget;
+import scrum.client.project.UsabilityMechanism;
+import scrum.client.project.UsabilityRecommendation;
 
-import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -47,10 +52,9 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 	private BlockListWidget<Task> taskList;
 	private BlockListWidget<AcceptanceCriteria> acceptanceCriteriaList;
 	private RequirementWidget requirementWidget;
-	private FlowPanel right;
-	private FlexTable bodyWidget;
+	private FlowPanel rightAC;
+	private FlowPanel rightT;
 	private ChangeHistoryWidget changeHistoryWidget;
-
 	private AnchorPanel statusIcon;
 
 	private boolean decidableOnInitialization;
@@ -84,6 +88,7 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 	@Override
 	protected void onUpdateHeader(BlockHeaderWidget header) {
 		Requirement requirement = getObject();
+
 		header.setDragHandle(requirement.getReference());
 		Image statusImage = null;
 		if (requirement.isRejected()) {
@@ -128,10 +133,25 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 		}
 
 		panel.add(requirementWidget);
-		panel.add(taskList);
-		panel.add(Gwt.createDiv("CreateTaskButtonWrapper", createTaskButton));
-		panel.add(acceptanceCriteriaList);
-		panel.add(Gwt.createDiv("CreateAcceptanceCriteriaButtonWrapper", createAcceptanceCriteriaButton));
+
+		FlowPanel leftT = new FlowPanel();
+		leftT.add(Gwt.createFieldLabel("Tasks"));
+		leftT.add(taskList);
+		leftT.add(Gwt.createDiv("CreateTaskButtonWrapper", createTaskButton));
+
+		rightT = new FlowPanel();
+
+		panel.add(TableBuilder.row(20, leftT, rightT));
+
+		FlowPanel leftAC = new FlowPanel();
+		leftAC.add(Gwt.createFieldLabel("Acceptance Criteria"));
+		leftAC.add(acceptanceCriteriaList);
+		leftAC.add(Gwt.createDiv("CreateAcceptanceCriteriaButtonWrapper", createAcceptanceCriteriaButton));
+
+		rightAC = new FlowPanel();
+
+		panel.add(TableBuilder.row(20, leftAC, rightAC));
+
 		panel.add(changeHistoryWidget);
 
 		return panel;
@@ -144,8 +164,110 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 		taskList.update();
 		acceptanceCriteriaList.setObjects(getObject().getAcceptanceCriterias());
 		acceptanceCriteriaList.update();
-		Gwt.update(right, createTaskButton, createAcceptanceCriteriaButton);
+		updateRightT();
+		updateRightAC();
+		Gwt.update(rightT, rightAC, createTaskButton, createAcceptanceCriteriaButton);
 		changeHistoryWidget.update();
+	}
+
+	private void updateRightT() {
+		rightT.clear();
+
+		rightT.add(Gwt.createFieldLabel("Usability Recommendations"));
+
+		for (final UsabilityMechanism usm : getObject().getUsabilityMechanisms()) {
+			rightT.add(Gwt.createFieldLabel(usm.getLabel()));
+
+			for (final UsabilityRecommendation usr : getObject().getTaskUsabilityRecommendations(usm)) {
+				FlowPanel createButton = new FlowPanel();
+				if (usr.isCreates()) {
+					createButton.add(Gwt.createDiv("CreateTaskWithUSR" + usm.getNumber() + "ButtonWrapper",
+						new ButtonWidget(new CreateTaskWithUsabilityRecommendationAction(getObject(), usr))));
+				}
+				FlowPanel modifyButton = new FlowPanel();
+				if (usr.isModifies()) {
+					DropdownMenuButtonWidget modifyT = new DropdownMenuButtonWidget();
+					modifyT.setLabel("Modify");
+
+					for (final Task ac : getObject().getTasks())
+						modifyT.addAction(new ModifyTaskWithUsabilityRecommendationAction(ac, usr));
+
+					modifyButton.add(modifyT);
+				}
+				FlowPanel label = new FlowPanel();
+				label.add(Gwt.createInline(usr.getLabel()));
+
+				TableBuilder tableBuilder = new TableBuilder();
+
+				if (getObject().containsUsabilityRecommendation(usr)) {
+					FlowPanel check = new FlowPanel();
+					check.add(Img.bundle.issFixed().createImage());
+					tableBuilder.add(check, 10, HorizontalAlignmentConstant.startOf(Direction.LTR));
+				}
+				if (usr.isCreates())
+					tableBuilder.add(createButton, 10, HorizontalAlignmentConstant.startOf(Direction.LTR));
+				if (usr.isModifies())
+					tableBuilder.add(modifyButton, 10, HorizontalAlignmentConstant.startOf(Direction.LTR));
+				tableBuilder.add(label, 10, HorizontalAlignmentConstant.startOf(Direction.LTR));
+
+				tableBuilder.nextRow();
+
+				rightT.add(tableBuilder.createTable());
+
+			}
+
+		}
+	}
+
+	private void updateRightAC() {
+		rightAC.clear();
+
+		rightAC.add(Gwt.createFieldLabel("Usability Recommendations"));
+
+		for (final UsabilityMechanism usm : getObject().getUsabilityMechanisms()) {
+			rightAC.add(Gwt.createFieldLabel(usm.getLabel()));
+
+			for (final UsabilityRecommendation usr : getObject().getAcceptanceCriteriaUsabilityRecommendations(usm)) {
+				FlowPanel createButton = new FlowPanel();
+				if (usr.isCreates()) {
+					createButton.add(Gwt.createDiv("CreateAcceptanceCriteriaWithUSR" + usm.getNumber()
+							+ "ButtonWrapper", new ButtonWidget(
+							new CreateAcceptanceCriteriaWithUsabilityRecommendationAction(getObject(), usr))));
+				}
+				FlowPanel modifyButton = new FlowPanel();
+				if (usr.isModifies()) {
+					DropdownMenuButtonWidget modifyAC = new DropdownMenuButtonWidget();
+					modifyAC.setLabel("Modify");
+
+					for (final AcceptanceCriteria ac : getObject().getAcceptanceCriterias())
+						modifyAC.addAction(new ModifyAcceptanceCriteriaWithUsabilityRecommendationAction(ac, usr));
+
+					modifyButton.add(modifyAC);
+				}
+				FlowPanel label = new FlowPanel();
+				label.add(Gwt.createInline(usr.getLabel()));
+
+				TableBuilder tableBuilder = new TableBuilder();
+
+				if (getObject().containsUsabilityRecommendation(usr)) {
+					FlowPanel check = new FlowPanel();
+					check.add(Img.bundle.issFixed().createImage());
+					tableBuilder.add(check, 10, HorizontalAlignmentConstant.startOf(Direction.LTR));
+				}
+
+				if (usr.isCreates())
+					tableBuilder.add(createButton, 10, HorizontalAlignmentConstant.startOf(Direction.LTR));
+				if (usr.isModifies())
+					tableBuilder.add(modifyButton, 10, HorizontalAlignmentConstant.startOf(Direction.LTR));
+				tableBuilder.add(label, 10, HorizontalAlignmentConstant.startOf(Direction.LTR));
+
+				tableBuilder.nextRow();
+
+				rightAC.add(tableBuilder.createTable());
+
+			}
+
+		}
 	}
 
 	public boolean selectTask(Task task) {

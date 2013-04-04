@@ -226,6 +226,7 @@ public class Project extends GProject {
 		ret.addAll(getMatching(getRequirements(), keys));
 		ret.addAll(getMatching(getQualitys(), keys));
 		ret.addAll(getMatching(getUsabilityMechanisms(), keys));
+		ret.addAll(getMatching(getUsabilityRecommendations(), keys));
 		ret.addAll(getMatching(getTasks(), keys));
 		ret.addAll(getMatching(getAcceptanceCriterias(), keys));
 		ret.addAll(getMatching(getWikipages(), keys));
@@ -322,7 +323,9 @@ public class Project extends GProject {
 
 		int number = Integer.parseInt(reference.substring(scrum.client.project.Requirement.REFERENCE_PREFIX.length()));
 
-		if (reference.startsWith(scrum.client.project.UsabilityMechanism.REFERENCE_PREFIX)) {
+		if (reference.startsWith(scrum.client.project.UsabilityRecommendation.REFERENCE_PREFIX)) {
+			return getUsabilityRecommendationByNumber(number);
+		} else if (reference.startsWith(scrum.client.project.UsabilityMechanism.REFERENCE_PREFIX)) {
 			return getUsabilityMechanismByNumber(number);
 		} else if (reference.startsWith(scrum.client.sprint.AcceptanceCriteria.REFERENCE_PREFIX)) {
 			return getAcceptanceCriteriaByNumber(number);
@@ -365,6 +368,10 @@ public class Project extends GProject {
 
 	public UsabilityMechanism getUsabilityMechanismByNumber(int number) {
 		return usabilityMechanismDao.getUsabilityMechanismByNumber(number, this);
+	}
+
+	public UsabilityRecommendation getUsabilityRecommendationByNumber(int number) {
+		return usabilityRecommendationDao.getUsabilityRecommendationByNumber(number, this);
 	}
 
 	public Quality getQualityByNumber(int number) {
@@ -486,6 +493,12 @@ public class Project extends GProject {
 	public synchronized int generateUsabilityMechanismNumber() {
 		int number = getLastUsabilityMechanismNumber() + 1;
 		setLastUsabilityMechanismNumber(number);
+		return number;
+	}
+
+	public synchronized int generateUsabilityRecommendationNumber() {
+		int number = getLastUsabilityRecommendationNumber() + 1;
+		setLastUsabilityRecommendationNumber(number);
 		return number;
 	}
 

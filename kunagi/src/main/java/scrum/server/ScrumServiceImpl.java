@@ -708,6 +708,7 @@ public class ScrumServiceImpl extends GScrumServiceImpl {
 			conversation.sendToClient(requirement.getAcceptanceCriteriasInSprint());
 		}
 		conversation.sendToClient(project.getUsabilityMechanisms());
+		conversation.sendToClient(project.getUsabilityRecommendations());
 		conversation.sendToClient(project.getQualitys());
 		conversation.sendToClient(project.getUserConfigs());
 		conversation.sendToClient(project.getWikipages());

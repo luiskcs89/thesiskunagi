@@ -1,0 +1,37 @@
+package scrum.client.project;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UsabilityMechanismRecomendations {
+
+	public static List<UsabilityMechanismRecomendation> getRecomendations(Requirement req) {
+
+		List<UsabilityMechanismRecomendation> recomendations = new ArrayList<UsabilityMechanismRecomendation>();
+
+		for (UsabilityMechanism um : req.getProject().getUsabilityMechanisms()) {
+			if (req.containsUsabilityMechanism(um)) {
+				switch (um.getNumber()) {
+					case 1:
+						recomendations.add(new UsabilityMechanismRecomendation(true, true,
+								"Indicate error/confirmation message in the corresponding action", um,
+								UsabilityMechanismRecomendation.AFFECTED_ENTITY.DEPENDENT_USABILITY_TASK));
+						recomendations.add(new UsabilityMechanismRecomendation(false, true,
+								"Check that the confirmation message appears when the operation is succesful", um,
+								UsabilityMechanismRecomendation.AFFECTED_ENTITY.ACCEPTANCE_CRITERIA));
+						recomendations
+								.add(new UsabilityMechanismRecomendation(
+										true,
+										false,
+										"Check that the error message appears when the operation fails (One Acceptance Criteria for each possible failure)",
+										um, UsabilityMechanismRecomendation.AFFECTED_ENTITY.ACCEPTANCE_CRITERIA));
+						recomendations.add(new UsabilityMechanismRecomendation(true, false,
+								"Indicate error/confirmation message in the corresponding action", um,
+								UsabilityMechanismRecomendation.AFFECTED_ENTITY.ACCEPTANCE_CRITERIA));
+						break;
+				}
+			}
+		}
+		return recomendations;
+	}
+}

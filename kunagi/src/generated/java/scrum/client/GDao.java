@@ -2189,6 +2189,14 @@ public abstract class GDao
         return ret;
     }
 
+    public final List<scrum.client.project.Requirement> getRequirementsByUsabilityRecommendation(scrum.client.project.UsabilityRecommendation usabilityRecommendation) {
+        List<scrum.client.project.Requirement> ret = new ArrayList<scrum.client.project.Requirement>();
+        for (scrum.client.project.Requirement entity : requirements.values()) {
+            if (entity.containsUsabilityRecommendation(usabilityRecommendation)) ret.add(entity);
+        }
+        return ret;
+    }
+
     public final List<scrum.client.project.Requirement> getRequirementsByLabel(java.lang.String label) {
         List<scrum.client.project.Requirement> ret = new ArrayList<scrum.client.project.Requirement>();
         for (scrum.client.project.Requirement entity : requirements.values()) {
@@ -3639,6 +3647,124 @@ public abstract class GDao
         return ret;
     }
 
+    // --- UsabilityRecommendation ---
+
+    protected Map<String, scrum.client.project.UsabilityRecommendation> usabilityRecommendations = new HashMap<String, scrum.client.project.UsabilityRecommendation>();
+
+    public final void clearUsabilityRecommendations() {
+        ilarkesto.core.logging.Log.DEBUG("Clearing UsabilityRecommendations");
+        usabilityRecommendations.clear();
+    }
+
+    public final boolean containsUsabilityRecommendation(scrum.client.project.UsabilityRecommendation usabilityRecommendation) {
+        return usabilityRecommendations.containsKey(usabilityRecommendation.getId());
+    }
+
+    public final void deleteUsabilityRecommendation(scrum.client.project.UsabilityRecommendation usabilityRecommendation) {
+        usabilityRecommendations.remove(usabilityRecommendation.getId());
+        entityDeleted(usabilityRecommendation);
+    }
+
+    public final void createUsabilityRecommendation(scrum.client.project.UsabilityRecommendation usabilityRecommendation, Runnable successAction) {
+        usabilityRecommendations.put(usabilityRecommendation.getId(), usabilityRecommendation);
+        entityCreated(usabilityRecommendation, successAction);
+    }
+
+    public final void createUsabilityRecommendation(scrum.client.project.UsabilityRecommendation usabilityRecommendation) {
+        usabilityRecommendations.put(usabilityRecommendation.getId(), usabilityRecommendation);
+        entityCreated(usabilityRecommendation, null);
+    }
+
+    protected scrum.client.project.UsabilityRecommendation updateUsabilityRecommendation(Map data) {
+        String id = (String) data.get("id");
+        scrum.client.project.UsabilityRecommendation entity = usabilityRecommendations.get(id);
+        if (entity == null) {
+            entity = new scrum.client.project.UsabilityRecommendation(data);
+            usabilityRecommendations.put(id, entity);
+            ilarkesto.core.logging.Log.DEBUG("UsabilityRecommendation received: " + entity.getId() + " ("+entity+")");
+        } else {
+            entity.updateProperties(data);
+            ilarkesto.core.logging.Log.DEBUG("UsabilityRecommendation updated: " + entity);
+        }
+        return entity;
+    }
+
+    public final scrum.client.project.UsabilityRecommendation getUsabilityRecommendation(String id) {
+        scrum.client.project.UsabilityRecommendation ret = usabilityRecommendations.get(id);
+        if (ret == null) throw new ilarkesto.gwt.client.EntityDoesNotExistException(id);
+        return ret;
+    }
+
+    public final Set<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendations(Collection<String> ids) {
+        Set<scrum.client.project.UsabilityRecommendation> ret = new HashSet<scrum.client.project.UsabilityRecommendation>();
+        for (String id : ids) {
+            scrum.client.project.UsabilityRecommendation entity = usabilityRecommendations.get(id);
+            if (entity == null) throw new ilarkesto.gwt.client.EntityDoesNotExistException(id);
+            ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendations() {
+        return new ArrayList<scrum.client.project.UsabilityRecommendation>(usabilityRecommendations.values());
+    }
+
+    public final List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendationsByProject(scrum.client.project.Project project) {
+        List<scrum.client.project.UsabilityRecommendation> ret = new ArrayList<scrum.client.project.UsabilityRecommendation>();
+        for (scrum.client.project.UsabilityRecommendation entity : usabilityRecommendations.values()) {
+            if (entity.isProject(project)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendationsByNumber(int number) {
+        List<scrum.client.project.UsabilityRecommendation> ret = new ArrayList<scrum.client.project.UsabilityRecommendation>();
+        for (scrum.client.project.UsabilityRecommendation entity : usabilityRecommendations.values()) {
+            if (entity.isNumber(number)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendationsByLabel(java.lang.String label) {
+        List<scrum.client.project.UsabilityRecommendation> ret = new ArrayList<scrum.client.project.UsabilityRecommendation>();
+        for (scrum.client.project.UsabilityRecommendation entity : usabilityRecommendations.values()) {
+            if (entity.isLabel(label)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendationsByCreates(boolean creates) {
+        List<scrum.client.project.UsabilityRecommendation> ret = new ArrayList<scrum.client.project.UsabilityRecommendation>();
+        for (scrum.client.project.UsabilityRecommendation entity : usabilityRecommendations.values()) {
+            if (entity.isCreates(creates)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendationsByModifies(boolean modifies) {
+        List<scrum.client.project.UsabilityRecommendation> ret = new ArrayList<scrum.client.project.UsabilityRecommendation>();
+        for (scrum.client.project.UsabilityRecommendation entity : usabilityRecommendations.values()) {
+            if (entity.isModifies(modifies)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendationsByEntityAffected(int entityAffected) {
+        List<scrum.client.project.UsabilityRecommendation> ret = new ArrayList<scrum.client.project.UsabilityRecommendation>();
+        for (scrum.client.project.UsabilityRecommendation entity : usabilityRecommendations.values()) {
+            if (entity.isEntityAffected(entityAffected)) ret.add(entity);
+        }
+        return ret;
+    }
+
+    public final List<scrum.client.project.UsabilityRecommendation> getUsabilityRecommendationsByUsabilityMechanism(scrum.client.project.UsabilityMechanism usabilityMechanism) {
+        List<scrum.client.project.UsabilityRecommendation> ret = new ArrayList<scrum.client.project.UsabilityRecommendation>();
+        for (scrum.client.project.UsabilityRecommendation entity : usabilityRecommendations.values()) {
+            if (entity.isUsabilityMechanism(usabilityMechanism)) ret.add(entity);
+        }
+        return ret;
+    }
+
     // --- User ---
 
     protected Map<String, scrum.client.admin.User> users = new HashMap<String, scrum.client.admin.User>();
@@ -4033,6 +4159,7 @@ public abstract class GDao
             clearSystemConfigs();
             clearTasks();
             clearUsabilityMechanisms();
+            clearUsabilityRecommendations();
             clearUsers();
             clearWikipages();
     }
@@ -4068,6 +4195,7 @@ public abstract class GDao
             entityMaps.add(systemConfigs);
             entityMaps.add(tasks);
             entityMaps.add(usabilityMechanisms);
+            entityMaps.add(usabilityRecommendations);
             entityMaps.add(users);
             entityMaps.add(wikipages);
         }
@@ -4151,6 +4279,9 @@ public abstract class GDao
         if (type.equals(scrum.client.project.UsabilityMechanism.ENTITY_TYPE)) {
             return updateUsabilityMechanism(data);
         }
+        if (type.equals(scrum.client.project.UsabilityRecommendation.ENTITY_TYPE)) {
+            return updateUsabilityRecommendation(data);
+        }
         if (type.equals(scrum.client.admin.User.ENTITY_TYPE)) {
             return updateUser(data);
         }
@@ -4188,6 +4319,7 @@ public abstract class GDao
         ret.put("SystemConfig", systemConfigs.size());
         ret.put("Task", tasks.size());
         ret.put("UsabilityMechanism", usabilityMechanisms.size());
+        ret.put("UsabilityRecommendation", usabilityRecommendations.size());
         ret.put("User", users.size());
         ret.put("Wikipage", wikipages.size());
         return ret;
