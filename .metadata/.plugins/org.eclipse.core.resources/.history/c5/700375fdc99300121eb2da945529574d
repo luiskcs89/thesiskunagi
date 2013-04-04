@@ -1,9 +1,0 @@
-package scrum.server.project;
-
-import java.util.*;
-import ilarkesto.core.logging.Log;
-
-public class UsabilityRecommnendationDao
-            extends GUsabilityRecommnendationDao {
-
-}

@@ -1,0 +1,58 @@
+package scrum.client.sprint;
+
+import ilarkesto.core.scope.Scope;
+import ilarkesto.gwt.client.Gwt;
+import scrum.client.common.TooltipBuilder;
+import scrum.client.project.Requirement;
+import scrum.client.project.UsabilityRecommendation;
+import scrum.client.workspace.ProjectWorkspaceWidgets;
+
+public class CreateAcceptanceCriteriaWithUsabilityRecommendationAction extends GCreateAcceptanceCriteriaAction {
+
+	private Requirement requirement;
+	private UsabilityRecommendation usr;
+
+	public CreateAcceptanceCriteriaWithUsabilityRecommendationAction(Requirement requirement,
+			UsabilityRecommendation usr) {
+		this.requirement = requirement;
+		this.usr = usr;
+	}
+
+	@Override
+	public String getLabel() {
+		return "Create";
+	}
+
+	@Override
+	protected void updateTooltip(TooltipBuilder tb) {
+		tb.setText("Create this Acceptance Criteria.");
+		if (!getCurrentProject().isTeamMember(getCurrentUser())) tb.addRemark(TooltipBuilder.NOT_TEAM);
+	}
+
+	@Override
+	public boolean isExecutable() {
+		return true;
+	}
+
+	@Override
+	public boolean isPermitted() {
+		if (!getCurrentProject().isTeamMember(getCurrentUser())) return false;
+		return true;
+	}
+
+	@Override
+	protected void onExecute() {
+		boolean create = requirement.containsUsabilityRecommendation(usr);
+		if (!create) {
+			if (Gwt.confirm("This Usability Recommendation was already added. Add again?"))
+			;
+			return;
+		}
+		AcceptanceCriteria acceptanceCriteria = requirement.createNewAcceptanceCriteria();
+		acceptanceCriteria.setLabel(usr.getLabel());
+		acceptanceCriteria.setDescription(usr.getLabel());
+		requirement.addUsabilityRecommendation(usr);
+		Scope.get().getComponent(ProjectWorkspaceWidgets.class).showEntity(acceptanceCriteria);
+	}
+
+}

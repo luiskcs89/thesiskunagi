@@ -1,6 +1,7 @@
 package scrum.client.sprint;
 
 import ilarkesto.core.scope.Scope;
+import ilarkesto.gwt.client.Gwt;
 import scrum.client.common.TooltipBuilder;
 import scrum.client.project.UsabilityRecommendation;
 import scrum.client.workspace.ProjectWorkspaceWidgets;
@@ -40,6 +41,10 @@ public class ModifyAcceptanceCriteriaWithUsabilityRecommendationAction extends G
 
 	@Override
 	protected void onExecute() {
+		boolean alreadyHas = acceptanceCriteria.getRequirement().containsUsabilityRecommendation(usr);
+		if (alreadyHas) {
+			if (!Gwt.confirm("This Usability Recommendation was already added. Add again?")) return;
+		}
 		if (acceptanceCriteria.getDescription() != null)
 			acceptanceCriteria.setDescription(acceptanceCriteria.getDescription() + "\n" + usr.getLabel());
 		else acceptanceCriteria.setDescription(usr.getLabel());

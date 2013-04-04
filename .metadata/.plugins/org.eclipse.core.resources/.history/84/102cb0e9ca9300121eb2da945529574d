@@ -1,9 +1,0 @@
-package scrum.client.project;
-
-import java.util.*;
-import ilarkesto.core.logging.Log;
-
-public class UsabilityRecommendation
-            extends GUsabilityRecommendation {
-
-}

@@ -187,6 +187,7 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 				FlowPanel modifyButton = new FlowPanel();
 				if (usr.isModifies()) {
 					DropdownMenuButtonWidget modifyT = new DropdownMenuButtonWidget();
+					modifyT.setStyleName("ButtonWidget");
 					modifyT.setLabel("Modify");
 
 					for (final Task ac : getObject().getTasks())
@@ -198,6 +199,9 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 				label.add(Gwt.createInline(usr.getLabel()));
 
 				TableBuilder tableBuilder = new TableBuilder();
+
+				tableBuilder.setWidth("auto");
+				tableBuilder.setCellSpacing(10);
 
 				if (getObject().containsUsabilityRecommendation(usr)) {
 					FlowPanel check = new FlowPanel();
@@ -238,7 +242,7 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 				if (usr.isModifies()) {
 					DropdownMenuButtonWidget modifyAC = new DropdownMenuButtonWidget();
 					modifyAC.setLabel("Modify");
-
+					modifyAC.setStyleName("ButtonWidget");
 					for (final AcceptanceCriteria ac : getObject().getAcceptanceCriterias())
 						modifyAC.addAction(new ModifyAcceptanceCriteriaWithUsabilityRecommendationAction(ac, usr));
 
@@ -248,6 +252,8 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 				label.add(Gwt.createInline(usr.getLabel()));
 
 				TableBuilder tableBuilder = new TableBuilder();
+				tableBuilder.setWidth("auto");
+				tableBuilder.setCellSpacing(10);
 
 				if (getObject().containsUsabilityRecommendation(usr)) {
 					FlowPanel check = new FlowPanel();

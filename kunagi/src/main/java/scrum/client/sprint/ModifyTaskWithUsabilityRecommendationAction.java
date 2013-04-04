@@ -1,6 +1,7 @@
 package scrum.client.sprint;
 
 import ilarkesto.core.scope.Scope;
+import ilarkesto.gwt.client.Gwt;
 import scrum.client.common.TooltipBuilder;
 import scrum.client.project.UsabilityRecommendation;
 import scrum.client.workspace.ProjectWorkspaceWidgets;
@@ -39,6 +40,10 @@ public class ModifyTaskWithUsabilityRecommendationAction extends GCreateAcceptan
 
 	@Override
 	protected void onExecute() {
+		boolean alreadyHas = task.getRequirement().containsUsabilityRecommendation(usr);
+		if (alreadyHas) {
+			if (!Gwt.confirm("This Usability Recommendation was already added. Add again?")) return;
+		}
 		if (task.getDescription() != null)
 			task.setDescription(task.getDescription() + "\n" + usr.getLabel());
 		else task.setDescription(usr.getLabel());

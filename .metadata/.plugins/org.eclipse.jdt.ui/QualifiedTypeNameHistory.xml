@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="scrum.client.project.UsabilityMechanismRecomendation.AFFECTED_ENTITY"/>
+<fullyQualifiedTypeName name="scrum.client.project.UsabilityRecommendation"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Window"/>
 </qualifiedTypeNameHistroy>
