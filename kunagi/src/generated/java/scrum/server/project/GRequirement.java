@@ -57,6 +57,7 @@ public abstract class GRequirement
         properties.put("tasksOrderIds", this.tasksOrderIds);
         properties.put("themes", this.themes);
         properties.put("epicId", this.epicId);
+        properties.put("relatedRequirementsIds", this.relatedRequirementsIds);
     }
 
     public int compareTo(Requirement other) {
@@ -1097,6 +1098,96 @@ public abstract class GRequirement
         setEpic(value == null ? null : (scrum.server.project.Requirement)requirementDao.getById((String)value));
     }
 
+    // -----------------------------------------------------------
+    // - relatedRequirements
+    // -----------------------------------------------------------
+
+    private java.util.Set<String> relatedRequirementsIds = new java.util.HashSet<String>();
+
+    public final java.util.Set<scrum.server.project.Requirement> getRelatedRequirements() {
+        return (java.util.Set) requirementDao.getByIdsAsSet(this.relatedRequirementsIds);
+    }
+
+    public final void setRelatedRequirements(Collection<scrum.server.project.Requirement> relatedRequirements) {
+        relatedRequirements = prepareRelatedRequirements(relatedRequirements);
+        if (relatedRequirements == null) relatedRequirements = Collections.emptyList();
+        java.util.Set<String> ids = getIdsAsSet(relatedRequirements);
+        if (this.relatedRequirementsIds.equals(ids)) return;
+        this.relatedRequirementsIds = ids;
+        updateLastModified();
+        fireModified("relatedRequirements="+Str.format(relatedRequirements));
+    }
+
+    protected Collection<scrum.server.project.Requirement> prepareRelatedRequirements(Collection<scrum.server.project.Requirement> relatedRequirements) {
+        return relatedRequirements;
+    }
+
+    protected void repairDeadRelatedRequirementReference(String entityId) {
+        if (this.relatedRequirementsIds.remove(entityId)) fireModified("relatedRequirements-=" + entityId);
+    }
+
+    public final boolean containsRelatedRequirement(scrum.server.project.Requirement relatedRequirement) {
+        if (relatedRequirement == null) return false;
+        return this.relatedRequirementsIds.contains(relatedRequirement.getId());
+    }
+
+    public final int getRelatedRequirementsCount() {
+        return this.relatedRequirementsIds.size();
+    }
+
+    public final boolean isRelatedRequirementsEmpty() {
+        return this.relatedRequirementsIds.isEmpty();
+    }
+
+    public final boolean addRelatedRequirement(scrum.server.project.Requirement relatedRequirement) {
+        if (relatedRequirement == null) throw new IllegalArgumentException("relatedRequirement == null");
+        boolean added = this.relatedRequirementsIds.add(relatedRequirement.getId());
+        if (added) updateLastModified();
+        if (added) fireModified("relatedRequirements+=" + relatedRequirement);
+        return added;
+    }
+
+    public final boolean addRelatedRequirements(Collection<scrum.server.project.Requirement> relatedRequirements) {
+        if (relatedRequirements == null) throw new IllegalArgumentException("relatedRequirements == null");
+        boolean added = false;
+        for (scrum.server.project.Requirement relatedRequirement : relatedRequirements) {
+            added = added | this.relatedRequirementsIds.add(relatedRequirement.getId());
+        }
+        return added;
+    }
+
+    public final boolean removeRelatedRequirement(scrum.server.project.Requirement relatedRequirement) {
+        if (relatedRequirement == null) throw new IllegalArgumentException("relatedRequirement == null");
+        if (this.relatedRequirementsIds == null) return false;
+        boolean removed = this.relatedRequirementsIds.remove(relatedRequirement.getId());
+        if (removed) updateLastModified();
+        if (removed) fireModified("relatedRequirements-=" + relatedRequirement);
+        return removed;
+    }
+
+    public final boolean removeRelatedRequirements(Collection<scrum.server.project.Requirement> relatedRequirements) {
+        if (relatedRequirements == null) return false;
+        if (relatedRequirements.isEmpty()) return false;
+        boolean removed = false;
+        for (scrum.server.project.Requirement _element: relatedRequirements) {
+            removed = removed | removeRelatedRequirement(_element);
+        }
+        return removed;
+    }
+
+    public final boolean clearRelatedRequirements() {
+        if (this.relatedRequirementsIds.isEmpty()) return false;
+        this.relatedRequirementsIds.clear();
+        updateLastModified();
+        fireModified("relatedRequirements cleared");
+        return true;
+    }
+
+    protected final void updateRelatedRequirements(Object value) {
+        Collection<String> ids = (Collection<String>) value;
+        setRelatedRequirements((java.util.Set) requirementDao.getByIdsAsSet(ids));
+    }
+
     public void updateProperties(Map<?, ?> properties) {
         for (Map.Entry entry : properties.entrySet()) {
             String property = (String) entry.getKey();
@@ -1121,6 +1212,7 @@ public abstract class GRequirement
             if (property.equals("tasksOrderIds")) updateTasksOrderIds(value);
             if (property.equals("themes")) updateThemes(value);
             if (property.equals("epicId")) updateEpic(value);
+            if (property.equals("relatedRequirementsIds")) updateRelatedRequirements(value);
         }
     }
 
@@ -1138,6 +1230,8 @@ public abstract class GRequirement
         if (this.tasksOrderIds == null) this.tasksOrderIds = new java.util.ArrayList<java.lang.String>();
         if (this.themes == null) this.themes = new java.util.ArrayList<java.lang.String>();
         repairDeadEpicReference(entityId);
+        if (this.relatedRequirementsIds == null) this.relatedRequirementsIds = new java.util.HashSet<String>();
+        repairDeadRelatedRequirementReference(entityId);
     }
 
     // --- ensure integrity ---
@@ -1203,6 +1297,16 @@ public abstract class GRequirement
         } catch (EntityDoesNotExistException ex) {
             LOG.info("Repairing dead epic reference");
             repairDeadEpicReference(this.epicId);
+        }
+        if (this.relatedRequirementsIds == null) this.relatedRequirementsIds = new java.util.HashSet<String>();
+        Set<String> relatedRequirements = new HashSet<String>(this.relatedRequirementsIds);
+        for (String entityId : relatedRequirements) {
+            try {
+                requirementDao.getById(entityId);
+            } catch (EntityDoesNotExistException ex) {
+                LOG.info("Repairing dead relatedRequirement reference");
+                repairDeadRelatedRequirementReference(entityId);
+            }
         }
     }
 

@@ -75,6 +75,8 @@ public abstract class GRequirementDao
         themesCache = null;
         requirementsByEpicCache.clear();
         epicsCache = null;
+        requirementsByRelatedRequirementCache.clear();
+        relatedRequirementsCache = null;
     }
 
     @Override
@@ -809,6 +811,46 @@ public abstract class GRequirementDao
 
     }
 
+    // -----------------------------------------------------------
+    // - relatedRequirements
+    // -----------------------------------------------------------
+
+    private final Cache<scrum.server.project.Requirement,Set<Requirement>> requirementsByRelatedRequirementCache = new Cache<scrum.server.project.Requirement,Set<Requirement>>(
+            new Cache.Factory<scrum.server.project.Requirement,Set<Requirement>>() {
+                public Set<Requirement> create(scrum.server.project.Requirement relatedRequirement) {
+                    return getEntities(new ContainsRelatedRequirement(relatedRequirement));
+                }
+            });
+
+    public final Set<Requirement> getRequirementsByRelatedRequirement(scrum.server.project.Requirement relatedRequirement) {
+        return new HashSet<Requirement>(requirementsByRelatedRequirementCache.get(relatedRequirement));
+    }
+    private Set<scrum.server.project.Requirement> relatedRequirementsCache;
+
+    public final Set<scrum.server.project.Requirement> getRelatedRequirements() {
+        if (relatedRequirementsCache == null) {
+            relatedRequirementsCache = new HashSet<scrum.server.project.Requirement>();
+            for (Requirement e : getEntities()) {
+                relatedRequirementsCache.addAll(e.getRelatedRequirements());
+            }
+        }
+        return relatedRequirementsCache;
+    }
+
+    private static class ContainsRelatedRequirement implements Predicate<Requirement> {
+
+        private scrum.server.project.Requirement value;
+
+        public ContainsRelatedRequirement(scrum.server.project.Requirement value) {
+            this.value = value;
+        }
+
+        public boolean test(Requirement e) {
+            return e.containsRelatedRequirement(value);
+        }
+
+    }
+
     // --- valueObject classes ---
     @Override
     protected Set<Class> getValueObjectClasses() {
@@ -858,6 +900,12 @@ public abstract class GRequirementDao
 
     public void setUsabilityRecommendationDao(scrum.server.project.UsabilityRecommendationDao usabilityRecommendationDao) {
         this.usabilityRecommendationDao = usabilityRecommendationDao;
+    }
+
+    scrum.server.project.RequirementDao requirementDao;
+
+    public void setRequirementDao(scrum.server.project.RequirementDao requirementDao) {
+        this.requirementDao = requirementDao;
     }
 
 }

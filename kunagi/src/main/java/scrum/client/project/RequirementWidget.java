@@ -31,7 +31,6 @@ import scrum.client.admin.Auth;
 import scrum.client.collaboration.CommentsWidget;
 import scrum.client.collaboration.EmoticonSelectorWidget;
 import scrum.client.common.AScrumWidget;
-import scrum.client.common.ThemesWidget;
 import scrum.client.estimation.PlanningPokerWidget;
 import scrum.client.journal.ChangeHistoryWidget;
 
@@ -75,7 +74,7 @@ public class RequirementWidget extends AScrumWidget {
 		}
 
 		left.addFieldRow("Description", requirement.getDescriptionModel());
-		left.addFieldRow("Themes", new ThemesWidget(requirement));
+		// left.addFieldRow("Themes", new ThemesWidget(requirement));
 
 		left.addFieldRow("Qualities", new AMultiSelectionViewEditWidget<Quality>() {
 
@@ -167,7 +166,7 @@ public class RequirementWidget extends AScrumWidget {
 
 			@Override
 			protected void onEditorSubmit() {
-				requirement.setUsabilityMechanisms(getEditorSelectedItems());
+				requirement.updateUsabilityMechanismLinks(getEditorSelectedItems());
 			}
 
 			@Override

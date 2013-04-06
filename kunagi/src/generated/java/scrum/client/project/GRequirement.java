@@ -852,6 +852,39 @@ public abstract class GRequirement
         return equals(this.epicId, id);
     }
 
+    // --- relatedRequirements ---
+
+    private Set<String> relatedRequirementsIds = new HashSet<String>();
+
+    public final java.util.Set<scrum.client.project.Requirement> getRelatedRequirements() {
+        if ( relatedRequirementsIds.isEmpty()) return Collections.emptySet();
+        return getDao().getRequirements(this.relatedRequirementsIds);
+    }
+
+    public final void setRelatedRequirements(Collection<scrum.client.project.Requirement> values) {
+        relatedRequirementsIds = ilarkesto.gwt.client.Gwt.getIdsAsSet(values);
+        propertyChanged("relatedRequirementsIds", this.relatedRequirementsIds);
+    }
+
+    public final void addRelatedRequirement(scrum.client.project.Requirement relatedRequirement) {
+        String id = relatedRequirement.getId();
+        if (relatedRequirementsIds.contains(id)) return;
+        relatedRequirementsIds.add(id);
+        propertyChanged("relatedRequirementsIds", this.relatedRequirementsIds);
+    }
+
+    public final void removeRelatedRequirement(scrum.client.project.Requirement relatedRequirement) {
+        String id = relatedRequirement.getId();
+        if (!relatedRequirementsIds.contains(id)) return;
+        relatedRequirementsIds.remove(id);
+        propertyChanged("relatedRequirementsIds", this.relatedRequirementsIds);
+    }
+
+    public final boolean containsRelatedRequirement(scrum.client.project.Requirement relatedRequirement) {
+        return relatedRequirementsIds.contains(relatedRequirement.getId());
+    }
+
+
     // --- update properties by map ---
 
     public void updateProperties(Map props) {
@@ -875,6 +908,7 @@ public abstract class GRequirement
         tasksOrderIds  = (java.util.List<java.lang.String>) props.get("tasksOrderIds");
         themes  = (java.util.List<java.lang.String>) props.get("themes");
         epicId = (String) props.get("epicId");
+        relatedRequirementsIds = (Set<String>) props.get("relatedRequirementsIds");
         updateLocalModificationTime();
     }
 
@@ -900,6 +934,7 @@ public abstract class GRequirement
         properties.put("tasksOrderIds", this.tasksOrderIds);
         properties.put("themes", this.themes);
         properties.put("epicId", this.epicId);
+        properties.put("relatedRequirementsIds", this.relatedRequirementsIds);
     }
 
     public final java.util.List<scrum.client.issues.Issue> getIssues() {

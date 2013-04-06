@@ -437,6 +437,7 @@ public class ScrumModelApplication extends AGeneratorApplication {
 			requirementModel.addAction("ResetRequirementEstimationVoting");
 			requirementModel.addAction("RequirementEstimationVote").addParameter("estimatedWork", Float.class);
 			requirementModel.addAction("SplitRequirement");
+			requirementModel.addSetReference("relatedRequirements", getRequirementModel());
 		}
 		return requirementModel;
 	}

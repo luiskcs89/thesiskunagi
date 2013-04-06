@@ -1197,4 +1197,11 @@ public class Project extends GProject implements ForumSupport {
 			help4.setLabel("Implementation of the use of the help functionality");
 		}
 	}
+
+	public Requirement requirementWithLabel(String label) {
+		for (Requirement req : getRequirements()) {
+			if (req.isLabel(label)) return req;
+		}
+		return null;
+	}
 }
