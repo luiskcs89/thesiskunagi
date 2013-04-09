@@ -34,12 +34,12 @@ public class UsabilityMechanism extends GUsabilityMechanism implements Reference
 
 	@Override
 	public String toHtml() {
-		return getReference() + " " + ScrumGwt.escapeHtml(getLabel());
+		return /* getReference() + " " + */ScrumGwt.escapeHtml(getLabel());
 	}
 
 	@Override
 	public String toString() {
-		return getReference() + " " + getLabel();
+		return getLabel();
 	}
 
 	@Override

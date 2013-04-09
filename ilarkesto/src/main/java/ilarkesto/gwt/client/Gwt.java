@@ -158,6 +158,10 @@ public class Gwt {
 		return Window.confirm(message);
 	}
 
+	public static void alert(String message) {
+		Window.alert(message);
+	}
+
 	public static String prompt(String message, String value) {
 		return Window.prompt(message, value);
 	}

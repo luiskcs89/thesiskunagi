@@ -6,6 +6,27 @@
  <description>Welcome to the home of Spring, the leading platform to build and run enterprise Java applications. Led and sustained by SpringSource, Spring delivers significant benefits for many projects, increasing development productivity and runtime performance while improving test coverage and application quality.</description>
  <language>en</language>
 <item>
+ <title>Spring Mobile 1.1.0.M3 Released</title>
+ <link>http://www.springsource.org/spring-mobile/news/1.1.0.m3-released</link>
+ <description>&lt;p&gt;Dear Spring Community,&lt;/p&gt;
+
+&lt;p&gt;We are happy to announce the release of &lt;a href=&quot;http://www.springsource.org/spring-mobile&quot;&gt;Spring Mobile&lt;/a&gt; 1.1.0.M3!&lt;/p&gt;
+
+&lt;p&gt;Spring Mobile provides extensions to Spring MVC that aid in the development of cross-platform mobile web applications.&lt;/p&gt;
+
+&lt;p&gt;This release adds simpler configuration when using a custom domain strategy with SiteSwitcherHandlerInterceptor. Kindle Fire devices are now detected as tablet or mobile depending on which mode they are in. Additionally, several issues have been resolved in this release. This release is built and tested against Spring Framework 3.2.2. See the &lt;a href=&quot;http://static.springsource.org/spring-mobile/docs/1.1.0.M3/changelog.txt&quot;&gt;changelog&lt;/a&gt; and &lt;a href=&quot;http://static.springsource.org/spring-mobile/docs/1.1.0.M3/reference/html/&quot;&gt;reference manual&lt;/a&gt; for more information. Many thanks to the community for their continued feedback and support in improving Spring Mobile.&lt;/p&gt;
+
+&lt;p&gt;To retrieve the software, 
+&lt;a href=&quot;http://www.springsource.com/download/community?project=Spring%20Mobile&quot;&gt;download&lt;/a&gt; the release distribution, or add the &lt;a href=&quot;http://static.springsource.org/spring-mobile/docs/1.1.0.M3/reference/html/device.html#device-howtoget&quot;&gt;maven artifacts&lt;/a&gt; to your project. Sample apps are available at &lt;a href=&quot;https://github.com/SpringSource/spring-mobile-samples&quot;&gt;github.com/SpringSource/spring-mobile-samples&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you are building a mobile web app, we encourage you try out Spring Mobile 1.1.0.M3 and &lt;a href=&quot;http://forum.springsource.org/forumdisplay.php?f=85&quot;&gt;collaborate&lt;/a&gt; with us on the next iteration of the project.&lt;/p&gt;</description>
+ <comments>http://www.springsource.org/spring-mobile/news/1.1.0.m3-released#comments</comments>
+ <category domain="http://www.springsource.org/taxonomy/term/4">News and Announcements</category>
+ <pubDate>Fri, 05 Apr 2013 05:25:49 +0000</pubDate>
+ <dc:creator>Roy Clarkson</dc:creator>
+ <guid isPermaLink="false">4311 at http://www.springsource.org</guid>
+</item>
+<item>
  <title>This Week in Spring - April 2nd, 2013</title>
  <link>http://www.springsource.org/node/4310</link>
  <description>&lt;h1&gt; This Week in Spring &lt;/h1&gt; 
@@ -443,24 +464,6 @@ https://github.com/damiendallimore/spring-integration-splunk-webex-demo&lt;BR&gt
  <pubDate>Thu, 21 Mar 2013 21:04:14 +0000</pubDate>
  <dc:creator>Pieter Humphrey</dc:creator>
  <guid isPermaLink="false">4297 at http://www.springsource.org</guid>
-</item>
-<item>
- <title>When.js 2.0.0 Released</title>
- <link>http://www.springsource.org/node/4296</link>
- <description>&lt;p&gt;Dear Spring Community,&lt;/p&gt;
- 
-&lt;p&gt;We are pleased to announce the release of &lt;a href=&quot;https://github.com/cujojs/when&quot;&gt;when.js 2.0.0&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;When.js is &lt;a href=&quot;http://cujojs.com&quot;&gt;cujojs&lt;/a&gt;&amp;#8217;s lightweight &lt;a href=&quot;http://promises-aplus.github.com/promises-spec&quot;&gt;Promises/A+&lt;/a&gt; and when() implementation, and powers the async core of &lt;a href=&quot;https://github.com/cujojs/wire&quot;&gt;wire.js&lt;/a&gt;, cujojs&amp;#8217;s IOC Container. It also provides several other useful Promise-related concepts, such as joining multiple promises, mapping and reducing collections of promises, and timed promises.&lt;/strong&gt;&lt;/p&gt;
- 
-&lt;p&gt;This major release brings full Promises/A+ compliance, and async promise resolutions. It also includes a few new features, including a new when/keys module for working with object keys.&lt;/p&gt;
- 
-&lt;p&gt;See the &lt;a href=&quot;https://groups.google.com/d/msg/cujojs/_rhNPkomX40/P_7gVouNbzIJ&quot;&gt;cujojs discussion group&lt;/a&gt; for further detail, and check out the full &lt;a href=&quot;https://github.com/cujojs/when#whats-new&quot;&gt;changelog&lt;/a&gt; for more info and direct links to docs for the new features.&lt;/p&gt;</description>
- <comments>http://www.springsource.org/node/4296#comments</comments>
- <category domain="http://www.springsource.org/taxonomy/term/4">News and Announcements</category>
- <pubDate>Wed, 20 Mar 2013 21:21:38 +0000</pubDate>
- <dc:creator>jeremyg484</dc:creator>
- <guid isPermaLink="false">4296 at http://www.springsource.org</guid>
 </item>
 </channel>
 </rss>

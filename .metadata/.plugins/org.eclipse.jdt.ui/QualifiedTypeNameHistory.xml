@@ -4,4 +4,9 @@
 <fullyQualifiedTypeName name="scrum.client.project.UsabilityRecommendation"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.Window"/>
+<fullyQualifiedTypeName name="scrum.client.workspace.Navigator"/>
+<fullyQualifiedTypeName name="scrum.client.workspace.ProjectWorkspaceWidgets"/>
+<fullyQualifiedTypeName name="scrum.client.core.ChangePropertiesServiceCall"/>
+<fullyQualifiedTypeName name="scrum.client.core.ServiceCaller"/>
+<fullyQualifiedTypeName name="scrum.client.Dao"/>
 </qualifiedTypeNameHistroy>

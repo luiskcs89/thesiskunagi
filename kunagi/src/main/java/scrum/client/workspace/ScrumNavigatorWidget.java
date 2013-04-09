@@ -25,7 +25,7 @@ import scrum.client.collaboration.WikiWidget;
 import scrum.client.impediments.ImpedimentListWidget;
 import scrum.client.pr.BlogWidget;
 import scrum.client.project.ProductBacklogWidget;
-import scrum.client.tasks.WhiteboardWidget;
+import scrum.client.sprint.SprintBacklogWidget;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -36,7 +36,7 @@ public class ScrumNavigatorWidget extends NavigatorWidget<Object> {
 		if (item instanceof StaticMenuItem) {
 			StaticMenuItem staticItem = (StaticMenuItem) item;
 			Object payload = staticItem.getPayload();
-			if ("sprint".equals(payload)) return Navigator.getPageHref(WhiteboardWidget.class);
+			if ("sprint".equals(payload)) return Navigator.getPageHref(SprintBacklogWidget.class);
 			if ("product".equals(payload)) return Navigator.getPageHref(ProductBacklogWidget.class);
 			if ("project".equals(payload)) return Navigator.getPageHref(ImpedimentListWidget.class);
 			if ("collaboration".equals(payload)) return Navigator.getPageHref(WikiWidget.class);

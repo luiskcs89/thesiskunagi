@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="43" version="2.0">
+<workbench progressCount="39" version="2.0">
 <workbenchAdvisor/>
-<window height="728" maximized="true" width="1024" x="150" y="0">
+<window height="728" maximized="true" width="1024" x="350" y="36">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.jdt.junit.ResultView"/>
 <orientation position="512" view="org.springframework.ide.eclipse.aop.ui.navigator.aopReferenceModelNavigator"/>
@@ -12,7 +12,7 @@
 </perspectiveBar>
 <coolbarLayout>
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="122" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="243" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="com.springsource.sts.ide.ui.actionSet.workbench" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="129" y="22"/>
@@ -25,6 +25,7 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.wst.html.core.htmlsource.source" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="com.springsource.sts.internal.ide.ui.editors.MultiPageDashboardEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -41,25 +42,35 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RequirementInSprintBlock.java" partName="RequirementInSprintBlock.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/main/java/scrum/client/sprint/RequirementInSprintBlock.java" title="RequirementInSprintBlock.java" tooltip="kunagi/src/main/java/scrum/client/sprint/RequirementInSprintBlock.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/main/java/scrum/client/sprint/RequirementInSprintBlock.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10064" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Requirement.java" partName="Requirement.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/main/java/scrum/client/project/Requirement.java" title="Requirement.java" tooltip="kunagi/src/main/java/scrum/client/project/Requirement.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/main/java/scrum/client/project/Requirement.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="19207" selectionTopPixel="9090"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" partName="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/main/java/scrum/client/sprint/ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" title="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/main/java/scrum/client/sprint/ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1360" selectionTopPixel="227"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreateTaskAction.java" partName="CreateTaskAction.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/main/java/scrum/client/sprint/CreateTaskAction.java" title="CreateTaskAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/CreateTaskAction.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/main/java/scrum/client/sprint/CreateTaskAction.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="13" selectionOffset="1672" selectionTopPixel="619"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ModifyTaskWithUsabilityRecommendationAction.java" partName="ModifyTaskWithUsabilityRecommendationAction.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/main/java/scrum/client/sprint/ModifyTaskWithUsabilityRecommendationAction.java" title="ModifyTaskWithUsabilityRecommendationAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/ModifyTaskWithUsabilityRecommendationAction.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/main/java/scrum/client/sprint/ModifyTaskWithUsabilityRecommendationAction.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1175" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GDao.java" partName="GDao.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/generated/java/scrum/client/GDao.java" title="GDao.java" tooltip="kunagi/src/generated/java/scrum/client/GDao.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/generated/java/scrum/client/GDao.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="3" selectionOffset="157290" selectionTopPixel="51735"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" partName="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" title="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1702" selectionTopPixel="502"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Task.java" partName="Task.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/main/java/scrum/client/sprint/Task.java" title="Task.java" tooltip="kunagi/src/main/java/scrum/client/sprint/Task.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/main/java/scrum/client/sprint/Task.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="14" selectionOffset="1719" selectionTopPixel="630"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GTask.java" partName="GTask.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/generated/java/scrum/client/sprint/GTask.java" title="GTask.java" tooltip="kunagi/src/generated/java/scrum/client/sprint/GTask.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/generated/java/scrum/client/sprint/GTask.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="14" selectionOffset="1119" selectionTopPixel="825"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RequirementWidget.java" partName="RequirementWidget.java" path="C:/Users/LuisK/Documents/GitHub/thesiskunagi/kunagi/src/main/java/scrum/client/project/RequirementWidget.java" title="RequirementWidget.java" tooltip="kunagi/src/main/java/scrum/client/project/RequirementWidget.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/kunagi/src/main/java/scrum/client/project/RequirementWidget.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="14" selectionOffset="5420" selectionTopPixel="2260"/>
 </editor>
 </editors>
 <views>
@@ -79,10 +90,12 @@
 <view id="org.eclipse.contribution.xref.ui.views.XReferenceView" partName="Cross References"/>
 <view id="org.eclipse.search.ui.views.SearchView" partName="Search">
 <viewState isPinned="false">
-<view IMemento.internal.id="org.eclipse.jdt.ui.JavaSearchResultPage" org.eclipse.jdt.search.resultpage.grouping="3" org.eclipse.jdt.search.resultpage.limit="1000" org.eclipse.jdt.search.resultpage.limit_enabled="TRUE" org.eclipse.jdt.search.resultpage.sorting="1" org.eclipse.search.lastActivation="3" org.eclipse.search.resultpage.layout="2"/>
+<view IMemento.internal.id="org.eclipse.search.text.FileSearchResultPage" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2" org.eclipse.search.resultpage.limit="1000" org.eclipse.search.resultpage.sorting="2"/>
 <view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
-<view IMemento.internal.id="org.eclipse.search.text.FileSearchResultPage" org.eclipse.search.lastActivation="2" org.eclipse.search.resultpage.layout="2" org.eclipse.search.resultpage.limit="1000" org.eclipse.search.resultpage.sorting="2"/>
 </viewState>
+</view>
+<view id="org.eclipse.jdt.callhierarchy.view" partName="Call Hierarchy">
+<viewState search_scope_type="1"/>
 </view>
 <view id="org.eclipse.ui.console.ConsoleView" partName="Console">
 <viewState/>
@@ -217,6 +230,7 @@
 <view id="org.eclipse.ui.views.AllMarkersView"/>
 <view id="org.eclipse.ui.views.ProgressView"/>
 <view id="org.eclipse.search.ui.views.SearchView"/>
+<view id="org.eclipse.jdt.callhierarchy.view"/>
 <fastViews>
 <view id="org.eclipse.jdt.junit.ResultView" ratio="0.25"/>
 <view id="org.springframework.ide.eclipse.aop.ui.navigator.aopReferenceModelNavigator" ratio="0.25"/>
@@ -263,12 +277,13 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="bottom" ratio="0.64354837" ratioLeft="399" ratioRight="221" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.82258064" ratioLeft="510" ratioRight="110" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.search.ui.views.SearchView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.AllMarkersView" label="Markers"/>
 <page content="org.eclipse.ui.views.ProgressView" label="Progress"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
+<page content="org.eclipse.jdt.callhierarchy.view" label="Call Hierarchy"/>
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.TaskList" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="LabelNotFound"/>
@@ -281,6 +296,7 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
@@ -299,169 +315,173 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/sprint/RequirementInSprintBlock.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/project/Requirement.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ilarkesto/src/main/java/ilarkesto/gwt/client/AGwtEntity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/core/ServiceCaller.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/generated/java/scrum/client/core/CreateEntityServiceCall.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/Dao.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ilarkesto/src/main/java/ilarkesto/gwt/client/AGwtDao.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/generated/java/scrum/client/GDao.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/project/Project.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/sprint/CreateTaskAction.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/sprint/CreateTaskWithUsabilityRecommendationAction.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/sprint/ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/sprint/ModifyTaskWithUsabilityRecommendationAction.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/generated/java/scrum/client/sprint/GAcceptanceCriteria.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/admin/UserBlock.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/ScrumGwtApplication.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/dashboard/SprintBurndownWidget.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/files/UploadWidget.java"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=ilarkesto/lib\/gwt-user.jar&lt;com.google.gwt.user.client(Window.class"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaAction.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/generated/java/scrum/client/GDao.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/sprint/Task.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/generated/java/scrum/client/sprint/GTask.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ilarkesto/src/main/java/ilarkesto/gwt/client/AGwtDao.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=kunagi/C:\/Program Files\/Java\/jdk1.6.0_25\/jre\/lib\/rt.jar&lt;java.util(Map.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/project/RequirementBlock.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/main/java/scrum/client/project/RequirementWidget.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/kunagi/src/generated/java/scrum/client/project/GRequirement.java"/>
 </editors>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="6017" y="0"/>
-</item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
+<item historyLabel="Requirement.java" index="0">
 <position/>
 </item>
-<item historyLabel="CreateTaskAction.java" index="2">
-<position info="not_deleted" x="3" y="0"/>
+<item historyLabel="ServiceCaller.java" index="2">
+<position info="not_deleted" x="1631" y="10"/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
+<item historyLabel="CreateEntityServiceCall.java" index="3">
+<position info="not_deleted" x="496" y="10"/>
+</item>
+<item historyLabel="Dao.java" index="4">
+<position info="not_deleted" x="8026" y="23"/>
+</item>
+<item historyLabel="CreateEntityServiceCall.java" index="3">
+<position info="not_deleted" x="245" y="23"/>
+</item>
+<item historyLabel="Dao.java" index="4">
+<position info="not_deleted" x="8026" y="23"/>
+</item>
+<item historyLabel="Requirement.java" index="0">
 <position/>
 </item>
-<item historyLabel="CreateTaskAction.java" index="2">
-<position info="not_deleted" x="3" y="0"/>
+<item historyLabel="Dao.java" index="4">
+<position info="not_deleted" x="8026" y="23"/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
+<item historyLabel="AGwtDao.java" index="5">
+<position info="not_deleted" x="3253" y="21"/>
+</item>
+<item historyLabel="GDao.java" index="6">
+<position info="not_deleted" x="94361" y="13"/>
+</item>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="17439" y="20"/>
+</item>
+<item historyLabel="Project.java" index="7">
+<position info="not_deleted" x="15014" y="17"/>
+</item>
+<item historyLabel="GDao.java" index="6">
+<position info="not_deleted" x="94361" y="13"/>
+</item>
+<item historyLabel="AGwtDao.java" index="5">
+<position info="not_deleted" x="3169" y="13"/>
+</item>
+<item historyLabel="AGwtDao.java" index="5">
+<position info="not_deleted" x="3253" y="21"/>
+</item>
+<item historyLabel="AGwtDao.java" index="5">
+<position info="not_deleted" x="3237" y="10"/>
+</item>
+<item historyLabel="AGwtEntity.java" index="1">
+<position info="not_deleted" x="1807" y="0"/>
+</item>
+<item historyLabel="AGwtDao.java" index="5">
+<position info="not_deleted" x="3237" y="10"/>
+</item>
+<item historyLabel="Requirement.java" index="0">
 <position/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
-<position/>
+<item historyLabel="CreateTaskAction.java" index="8">
+<position info="not_deleted" x="1672" y="13"/>
 </item>
-<item historyLabel="CreateTaskWithUsabilityRecommendationAction.java" index="3">
-<position info="not_deleted" x="1330" y="0"/>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="12177" y="10"/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
-<position/>
+<item historyLabel="GDao.java" index="9">
+<position info="not_deleted" x="157232" y="10"/>
 </item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="6017" y="0"/>
+<item historyLabel="CreateTaskAction.java" index="8">
+<position info="not_deleted" x="1672" y="13"/>
 </item>
-<item historyLabel="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="4">
-<position/>
+<item historyLabel="GDao.java" index="9">
+<position info="not_deleted" x="157232" y="10"/>
 </item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="6017" y="0"/>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="12154" y="4"/>
 </item>
-<item historyLabel="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="4">
-<position/>
+<item historyLabel="Task.java" index="10">
+<position info="not_deleted" x="1719" y="14"/>
 </item>
-<item historyLabel="ModifyTaskWithUsabilityRecommendationAction.java" index="5">
-<position/>
+<item historyLabel="GTask.java" index="11">
+<position info="not_deleted" x="1119" y="14"/>
 </item>
-<item historyLabel="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="4">
-<position/>
+<item historyLabel="Task.java" index="10">
+<position info="not_deleted" x="1719" y="14"/>
 </item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="6017" y="0"/>
+<item historyLabel="GTask.java" index="11">
+<position info="not_deleted" x="1119" y="14"/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
-<position info="not_deleted" x="1328" y="44"/>
+<item historyLabel="GDao.java" index="9">
+<position info="not_deleted" x="157323" y="13"/>
 </item>
-<item historyLabel="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="4">
-<position info="not_deleted" x="1269" y="68"/>
+<item historyLabel="AGwtDao.java" index="12">
+<position info="not_deleted" x="3169" y="13"/>
 </item>
-<item historyLabel="ModifyTaskWithUsabilityRecommendationAction.java" index="5">
-<position info="not_deleted" x="1116" y="0"/>
+<item historyLabel="GDao.java" index="9">
+<position info="not_deleted" x="157290" y="3"/>
 </item>
-<item historyLabel="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="4">
-<position info="not_deleted" x="1269" y="68"/>
+<item historyLabel="Map.class" index="13">
+<position info="not_deleted" x="10141" y="3"/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
-<position info="not_deleted" x="1328" y="44"/>
+<item historyLabel="GDao.java" index="9">
+<position info="not_deleted" x="157290" y="3"/>
 </item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="7645" y="0"/>
+<item historyLabel="CreateTaskAction.java" index="8">
+<position info="not_deleted" x="1672" y="13"/>
 </item>
-<item historyLabel="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="4">
-<position info="not_deleted" x="1276" y="14"/>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="12154" y="4"/>
 </item>
-<item historyLabel="GAcceptanceCriteria.java" index="6">
-<position info="not_deleted" x="5379" y="14"/>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="37691" y="0"/>
 </item>
-<item historyLabel="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="4">
-<position info="not_deleted" x="1276" y="14"/>
-</item>
-<item historyLabel="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="4">
-<position info="not_deleted" x="1360" y="0"/>
-</item>
-<item historyLabel="ModifyTaskWithUsabilityRecommendationAction.java" index="5">
-<position info="not_deleted" x="1175" y="0"/>
-</item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="7645" y="0"/>
-</item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="8016" y="0"/>
-</item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="8015" y="0"/>
-</item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="8071" y="3"/>
-</item>
-<item historyLabel="UserBlock.java" index="7">
-<position info="not_deleted" x="2016" y="10"/>
-</item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="10064" y="0"/>
-</item>
-<item historyLabel="ScrumGwtApplication.java" index="8">
-<position info="not_deleted" x="3968" y="6"/>
-</item>
-<item historyLabel="SprintBurndownWidget.java" index="9">
-<position info="not_deleted" x="3" y="0"/>
-</item>
-<item historyLabel="SprintBurndownWidget.java" index="9">
-<position info="not_deleted" x="1591" y="13"/>
-</item>
-<item historyLabel="SprintBurndownWidget.java" index="9">
-<position info="not_deleted" x="1623" y="6"/>
-</item>
-<item historyLabel="UploadWidget.java" index="10">
-<position info="not_deleted" x="1699" y="0"/>
-</item>
-<item historyLabel="UploadWidget.java" index="10">
-<position info="not_deleted" x="3732" y="8"/>
-</item>
-<item historyLabel="UploadWidget.java" index="10">
-<position info="not_deleted" x="3808" y="5"/>
-</item>
-<item historyLabel="Window.class" index="11">
-<position info="not_deleted" x="16876" y="5"/>
-</item>
-<item historyLabel="UploadWidget.java" index="10">
-<position info="not_deleted" x="3808" y="5"/>
-</item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="10064" y="0"/>
-</item>
-<item historyLabel="CreateAcceptanceCriteriaAction.java" index="12">
+<item historyLabel="RequirementBlock.java" index="14">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaAction.java" index="12">
-<position/>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="37691" y="0"/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaAction.java" index="12">
-<position info="not_deleted" x="985" y="0"/>
-</item>
-<item historyLabel="RequirementInSprintBlock.java" index="0">
-<position info="not_deleted" x="10064" y="0"/>
-</item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
+<item historyLabel="RequirementWidget.java" index="15">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
-<position info="not_deleted" x="1207" y="0"/>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="37691" y="0"/>
 </item>
-<item active="true" historyLabel="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" index="1">
-<position info="not_deleted" x="1375" y="0"/>
+<item historyLabel="RequirementWidget.java" index="15">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="19179" y="21"/>
+</item>
+<item historyLabel="GRequirement.java" index="16">
+<position/>
+</item>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="19127" y="21"/>
+</item>
+<item historyLabel="GRequirement.java" index="16">
+<position info="not_deleted" x="28354" y="168"/>
+</item>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="19127" y="21"/>
+</item>
+<item historyLabel="GRequirement.java" index="16">
+<position info="not_deleted" x="28354" y="168"/>
+</item>
+<item historyLabel="Requirement.java" index="0">
+<position info="not_deleted" x="19207" y="0"/>
+</item>
+<item active="true" historyLabel="RequirementWidget.java" index="15">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -481,50 +501,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java">
-<persistable path="/kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaWithUsabilityRecommendationAction.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GRequirement.java" tooltip="kunagi/src/generated/java/scrum/client/project/GRequirement.java">
+<persistable path="/kunagi/src/generated/java/scrum/client/project/GRequirement.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreateAcceptanceCriteriaAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaAction.java">
-<persistable path="/kunagi/src/main/java/scrum/client/sprint/CreateAcceptanceCriteriaAction.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RequirementWidget.java" tooltip="kunagi/src/main/java/scrum/client/project/RequirementWidget.java">
+<persistable path="/kunagi/src/main/java/scrum/client/project/RequirementWidget.java"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Window.class" tooltip="com.google.gwt.user.client.Window">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ilarkesto/lib\/gwt-user.jar&lt;com.google.gwt.user.client(Window.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RequirementBlock.java" tooltip="kunagi/src/main/java/scrum/client/project/RequirementBlock.java">
+<persistable path="/kunagi/src/main/java/scrum/client/project/RequirementBlock.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ScrumGwtApplication.java" tooltip="kunagi/src/main/java/scrum/client/ScrumGwtApplication.java">
-<persistable path="/kunagi/src/main/java/scrum/client/ScrumGwtApplication.java"/>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Map.class" tooltip="java.util.Map">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=kunagi/C:\/Program Files\/Java\/jdk1.6.0_25\/jre\/lib\/rt.jar&lt;java.util(Map.class"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="UserBlock.java" tooltip="kunagi/src/main/java/scrum/client/admin/UserBlock.java">
-<persistable path="/kunagi/src/main/java/scrum/client/admin/UserBlock.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AGwtDao.java" tooltip="ilarkesto/src/main/java/ilarkesto/gwt/client/AGwtDao.java">
+<persistable path="/ilarkesto/src/main/java/ilarkesto/gwt/client/AGwtDao.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ModifyTaskWithUsabilityRecommendationAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/ModifyTaskWithUsabilityRecommendationAction.java">
-<persistable path="/kunagi/src/main/java/scrum/client/sprint/ModifyTaskWithUsabilityRecommendationAction.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GTask.java" tooltip="kunagi/src/generated/java/scrum/client/sprint/GTask.java">
+<persistable path="/kunagi/src/generated/java/scrum/client/sprint/GTask.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GAcceptanceCriteria.java" tooltip="kunagi/src/generated/java/scrum/client/sprint/GAcceptanceCriteria.java">
-<persistable path="/kunagi/src/generated/java/scrum/client/sprint/GAcceptanceCriteria.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Task.java" tooltip="kunagi/src/main/java/scrum/client/sprint/Task.java">
+<persistable path="/kunagi/src/main/java/scrum/client/sprint/Task.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java">
-<persistable path="/kunagi/src/main/java/scrum/client/sprint/ModifyAcceptanceCriteriaWithUsabilityRecommendationAction.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreateTaskWithUsabilityRecommendationAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/CreateTaskWithUsabilityRecommendationAction.java">
-<persistable path="/kunagi/src/main/java/scrum/client/sprint/CreateTaskWithUsabilityRecommendationAction.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GDao.java" tooltip="kunagi/src/generated/java/scrum/client/GDao.java">
+<persistable path="/kunagi/src/generated/java/scrum/client/GDao.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreateTaskAction.java" tooltip="kunagi/src/main/java/scrum/client/sprint/CreateTaskAction.java">
 <persistable path="/kunagi/src/main/java/scrum/client/sprint/CreateTaskAction.java"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="HasHorizontalAlignment$HorizontalAlignmentConstant.class" tooltip="com.google.gwt.user.client.ui.HasHorizontalAlignment$HorizontalAlignmentConstant">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ilarkesto/lib\/gwt-user.jar&lt;com.google.gwt.user.client.ui(HasHorizontalAlignment$HorizontalAlignmentConstant.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AGwtEntity.java" tooltip="ilarkesto/src/main/java/ilarkesto/gwt/client/AGwtEntity.java">
+<persistable path="/ilarkesto/src/main/java/ilarkesto/gwt/client/AGwtEntity.java"/>
 </file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="FlexTable.class" tooltip="com.google.gwt.user.client.ui.FlexTable">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=ilarkesto/lib\/gwt-user.jar&lt;com.google.gwt.user.client.ui(FlexTable.class"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Project.java" tooltip="kunagi/src/main/java/scrum/client/project/Project.java">
+<persistable path="/kunagi/src/main/java/scrum/client/project/Project.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TableBuilder.java" tooltip="ilarkesto/src/main/java/ilarkesto/gwt/client/TableBuilder.java">
-<persistable path="/ilarkesto/src/main/java/ilarkesto/gwt/client/TableBuilder.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CreateEntityServiceCall.java" tooltip="kunagi/src/generated/java/scrum/client/core/CreateEntityServiceCall.java">
+<persistable path="/kunagi/src/generated/java/scrum/client/core/CreateEntityServiceCall.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Requirement.java" tooltip="kunagi/src/main/java/scrum/client/project/Requirement.java">
-<persistable path="/kunagi/src/main/java/scrum/client/project/Requirement.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SystemMessageManager.java" tooltip="kunagi/src/main/java/scrum/client/admin/SystemMessageManager.java">
+<persistable path="/kunagi/src/main/java/scrum/client/admin/SystemMessageManager.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GCreateAcceptanceCriteriaAction.java" tooltip="kunagi/src/generated/java/scrum/client/sprint/GCreateAcceptanceCriteriaAction.java">
-<persistable path="/kunagi/src/generated/java/scrum/client/sprint/GCreateAcceptanceCriteriaAction.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ChangePropertiesServiceCall.java" tooltip="kunagi/src/generated/java/scrum/client/core/ChangePropertiesServiceCall.java">
+<persistable path="/kunagi/src/generated/java/scrum/client/core/ChangePropertiesServiceCall.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ServiceCaller.java" tooltip="kunagi/src/main/java/scrum/client/core/ServiceCaller.java">
+<persistable path="/kunagi/src/main/java/scrum/client/core/ServiceCaller.java"/>
 </file>
 </mruList>
 </workbench>

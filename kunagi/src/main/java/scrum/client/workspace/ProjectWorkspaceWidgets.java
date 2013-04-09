@@ -114,10 +114,10 @@ public class ProjectWorkspaceWidgets extends GProjectWorkspaceWidgets implements
 		pages.addPage(new Page(dashboard, "Dashboard", null));
 
 		String sprintGroupKey = "sprint";
-		whiteboard = new WhiteboardWidget();
-		pages.addPage(new Page(whiteboard, "Whiteboard", sprintGroupKey));
 		sprintBacklog = new SprintBacklogWidget();
 		pages.addPage(new Page(sprintBacklog, "Sprint Backlog", sprintGroupKey));
+		whiteboard = new WhiteboardWidget();
+		pages.addPage(new Page(whiteboard, "Whiteboard", sprintGroupKey));
 
 		String productGroupKey = "product";
 		productBacklog = new ProductBacklogWidget();
@@ -348,14 +348,14 @@ public class ProjectWorkspaceWidgets extends GProjectWorkspaceWidgets implements
 
 			boolean inCurrentSprint = requirement.isInCurrentSprint();
 			if (inCurrentSprint) {
-				if (getWorkarea().isShowing(sprintBacklog)) return sprintBacklog;
-				return whiteboard;
+				if (getWorkarea().isShowing(whiteboard)) return whiteboard;
+				return sprintBacklog;
 			}
 			return productBacklog;
 		}
 		if (entity instanceof Sprint) {
 			Sprint sprint = (Sprint) entity;
-			if (sprint.isCurrent()) return whiteboard;
+			if (sprint.isCurrent()) return sprintBacklog;
 			return sprintHistory;
 		}
 		if (entity instanceof Issue) return issueList;

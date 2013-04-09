@@ -31,7 +31,7 @@
 		<guid isPermaLink="false">http://blog.springsource.org/?p=13076</guid>
 		<description><![CDATA[By now you’ve probably heard about Pivotal. I’d like to take a moment here to explain what this means for Spring, and to tell you about some of our plans for 2013. In case you missed it, here’s the essential background on Pivotal: Led by Paul Maritz, the initiative unites key people and projects from  <a href="http://blog.springsource.org/2013/04/03/spring-and-open-source-at-the-pivotal-initiative/"><em>Read more...</em></a>]]></description>
 		<wfw:commentRss>http://blog.springsource.org/2013/04/03/spring-and-open-source-at-the-pivotal-initiative/feed/</wfw:commentRss>
-		<slash:comments>1</slash:comments>
+		<slash:comments>2</slash:comments>
 		</item>
 		<item>
 		<title>Bringing new life to Spring Travel with Thymeleaf</title>
@@ -48,7 +48,7 @@
 		<guid isPermaLink="false">http://blog.springsource.org/?p=12771</guid>
 		<description><![CDATA[&#160; Hi reader! My name is Daniel Fern&#225;ndez and I am the author of the Thymeleaf template engine as well as several other open source technologies. I recently helped update the Spring Travel sample application and migrate its view layer to Thymeleaf, and the nice folks at SpringSource have given me the opportunity to write  <a href="http://blog.springsource.org/2013/03/26/bringing-new-life-to-spring-travel-with-thymeleaf/"><em>Read more...</em></a>]]></description>
 		<wfw:commentRss>http://blog.springsource.org/2013/03/26/bringing-new-life-to-spring-travel-with-thymeleaf/feed/</wfw:commentRss>
-		<slash:comments>16</slash:comments>
+		<slash:comments>17</slash:comments>
 		</item>
 		<item>
 		<title>Spring Petclinic is on Github!</title>
@@ -61,7 +61,7 @@
 		<guid isPermaLink="false">http://blog.springsource.org/?p=12963</guid>
 		<description><![CDATA[We are pleased to announce that the Spring Petclinic sample application has been refactored. The source code is now available on github and has been deployed on cloudfoundry. Here is a screenshot of the new application: And here is an overview of the new architecture: Spring, Spring, Spring We have used the following Spring features:  <a href="http://blog.springsource.org/2013/03/21/spring-petclinic-is-on-github/"><em>Read more...</em></a>]]></description>
 		<wfw:commentRss>http://blog.springsource.org/2013/03/21/spring-petclinic-is-on-github/feed/</wfw:commentRss>
-		<slash:comments>5</slash:comments>
+		<slash:comments>8</slash:comments>
 		</item>
 		<item>
 		<title>Spring Data GemFire 1.3.0 Released</title>
@@ -172,7 +172,7 @@
 		<guid isPermaLink="false">http://blog.springsource.org/?p=12562</guid>
 		<description><![CDATA[One of the major goals of <a href="https://github.com/scripted-editor/scripted/">Scripted Editor</a> 0.4 is extensibility.  We <a href="http://blog.springsource.org/2013/01/08/scripted-editor-0-3-release-available/">recently released 0.3</a> and we are making fast progress towards 0.4.  Part of the extensibility story is simple declarative extensions to editor functionality (the other part is a powerful plugin model, which will be described in a future blog post).  In this blog post, I will introduce custom code completions and templates for the Scripted editor.]]></description>
 		<wfw:commentRss>http://blog.springsource.org/2013/01/22/simple-templates-for-the-scripted-editor/feed/</wfw:commentRss>
-		<slash:comments>2</slash:comments>
+		<slash:comments>3</slash:comments>
 		</item>
 	</channel>
 </rss>

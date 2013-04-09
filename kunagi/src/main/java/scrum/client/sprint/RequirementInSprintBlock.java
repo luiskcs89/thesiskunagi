@@ -176,7 +176,8 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 		rightT.add(Gwt.createFieldLabel("Usability Recommendations"));
 
 		for (final UsabilityMechanism usm : getObject().getUsabilityMechanisms()) {
-			rightT.add(Gwt.createFieldLabel(usm.getLabel()));
+			if (!getObject().getTaskUsabilityRecommendations(usm).isEmpty())
+				rightT.add(Gwt.createFieldLabel(usm.getLabel()));
 
 			for (final UsabilityRecommendation usr : getObject().getTaskUsabilityRecommendations(usm)) {
 				FlowPanel createButton = new FlowPanel();
@@ -229,7 +230,8 @@ public class RequirementInSprintBlock extends ABlockWidget<Requirement> {
 		rightAC.add(Gwt.createFieldLabel("Usability Recommendations"));
 
 		for (final UsabilityMechanism usm : getObject().getUsabilityMechanisms()) {
-			rightAC.add(Gwt.createFieldLabel(usm.getLabel()));
+			if (!getObject().getAcceptanceCriteriaUsabilityRecommendations(usm).isEmpty())
+				rightAC.add(Gwt.createFieldLabel(usm.getLabel()));
 
 			for (final UsabilityRecommendation usr : getObject().getAcceptanceCriteriaUsabilityRecommendations(usm)) {
 				FlowPanel createButton = new FlowPanel();

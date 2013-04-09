@@ -49,6 +49,7 @@ public class RequirementWidget extends AScrumWidget {
 	private boolean acceptReject;
 
 	private boolean decidableOnInitialization;
+	private AOutputViewEditWidget relatedStories;
 
 	// FIXME remove showComments
 	public RequirementWidget(Requirement requirement, boolean showLabel, boolean showSprint, boolean showTaskWork,
@@ -126,13 +127,16 @@ public class RequirementWidget extends AScrumWidget {
 			}
 		});
 
-		left.addFieldRow("Related Stories", new AOutputViewEditWidget() {
+		relatedStories = new AOutputViewEditWidget() {
 
 			@Override
 			protected void onViewerUpdate() {
 				setViewer(ScrumGwt.createToHtmlItemsWidget(requirement.getRelatedRequirements()));
 			}
-		});
+
+		};
+
+		left.addFieldRow("Related Stories", relatedStories);
 
 		left.addFieldRow("Related Issues", new AOutputViewEditWidget() {
 
@@ -167,6 +171,8 @@ public class RequirementWidget extends AScrumWidget {
 			@Override
 			protected void onEditorSubmit() {
 				requirement.updateUsabilityMechanismLinks(getEditorSelectedItems());
+				relatedStories.update();
+				this.update();
 			}
 
 			@Override

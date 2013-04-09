@@ -109,6 +109,7 @@ public class RequirementInWhiteboardBlock extends ABlockWidget<Requirement> {
 
 		FlowPanel panel = new FlowPanel();
 		panel.add(requirementWidget);
+		panel.add(Gwt.createFieldLabel("Acceptance Criteria"));
 		panel.add(acceptanceCriteriaList);
 		panel.add(createAcceptanceCriteriaButton);
 		panel.add(changeHistoryWidget);
